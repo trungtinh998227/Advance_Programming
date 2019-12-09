@@ -7,11 +7,15 @@ namespace KaraokeApp.Controllers
 {
     class AccountDAO
     {
-        private KaraokeContext db;
-        public AccountDAO(KaraokeContext context)
-        {
-            this.db = context;
+        private static AccountDAO instance;
+        KaraokeContext db = KaraokeContext.Instance;
+        private AccountDAO() { }
+
+        internal static AccountDAO Instance {
+            get {if(instance==null) instance = new AccountDAO(); return AccountDAO.instance; }
+            set => instance = value; 
         }
+
         public void AddAccount(Account account)
         {
             try
@@ -28,9 +32,9 @@ namespace KaraokeApp.Controllers
         {
             return db.Accounts.FirstOrDefault(a => a.ID == Id);
         }
-        public string ValidateAccount(String userName, String passWord)
+        public int ValidateAccount(String userName, String passWord)
         {
-            return (db.Accounts.FirstOrDefault(a => a.PassWord == passWord && a.UserName == userName).Position);     
+            return (db.Accounts.FirstOrDefault(a => a.PassWord == passWord && a.UserName == userName).ID);     
         }
     }
 }

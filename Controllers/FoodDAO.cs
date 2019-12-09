@@ -7,11 +7,16 @@ namespace KaraokeApp.Controllers
 {
     class FoodDAO
     {
-        private KaraokeContext db;
-        public FoodDAO(KaraokeContext context)
+        private static FoodDAO instance;
+        private KaraokeContext db = KaraokeContext.Instance;
+
+        internal static FoodDAO Instance
         {
-            this.db = context;
+            get { if (instance == null) instance = new FoodDAO(); return FoodDAO.instance; }
+            set => instance = value;
         }
+
+        private FoodDAO() { }
 
         public void AddFood(Food food)
         {
@@ -36,6 +41,10 @@ namespace KaraokeApp.Controllers
         public Food GetFoodByName(string name)
         {
             return db.Foods.FirstOrDefault(f => f.Name == name);
+        }
+        public Food GetFoodByID(int id)
+        {
+            return db.Foods.FirstOrDefault(f => f.ID == id);
         }
     }
 }

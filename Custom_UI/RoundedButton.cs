@@ -12,6 +12,10 @@ namespace KaraokeApp
 {
     public class RoundedButton : Button
     {
+        public RoundedButton()
+        {
+            SetStyle(ControlStyles.StandardClick | ControlStyles.StandardDoubleClick, true);
+        }
         GraphicsPath GetRoundPath(RectangleF Rect, int radius)
         {
             float m = 2.75F;

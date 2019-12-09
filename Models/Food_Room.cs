@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace KaraokeApp.Models
 {
-    class Food_Room
+    public class Food_Room
     {
         public Food_Room() { }
         public Food_Room(int iD, int amount, int totalPrice)
@@ -24,7 +24,7 @@ namespace KaraokeApp.Models
         public int Amount { get; set; }
         public int TotalPrice { get; set; }
         
-        public Room room { get; set; }
-        public Food Food { get; set; }
+        public virtual Room room { get; set; }
+        public virtual Food Food { get; set; }
     }
 }

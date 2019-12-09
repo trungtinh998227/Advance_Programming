@@ -9,9 +9,7 @@ namespace KaraokeApp
 {
     public partial class Login_Form : Form
     {
-        public string Position { get; set; }
-        static KaraokeContext context = new KaraokeContext();
-        AccountDAO accountDAO = new AccountDAO(context);
+        public static int UserID { get; set; }
         private string passWord = "";
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
@@ -41,7 +39,7 @@ namespace KaraokeApp
             invalidUser.Visible = false;
             InvalidPass.Visible = false;
             invalidAccount.Visible = false;
-            /*var data = new DefaultData(context);
+/*            var data = new DefaultData(KaraokeContext.Instance);
             data.AddAccount();
             data.AddRoom();
             data.AddProducer_Food();*/
@@ -64,11 +62,12 @@ namespace KaraokeApp
                 InvalidPass.Visible = true;
                 InvalidPass.Text = "Vui lòng nhập \"Mật khẩu\"";
             }
-            else if ((Position = accountDAO.ValidateAccount(txb_UserName.Text, passWord)) != "")
+            else if ((UserID = AccountDAO.Instance.ValidateAccount(txb_UserName.Text, passWord)) != -1)
             {
                 invalidUser.Visible = false;
                 InvalidPass.Visible = false;
                 invalidAccount.Visible = false;
+                Constants.userID = UserID;
                 Main main = new Main();
                 main.ShowDialog();
                 this.Hide();

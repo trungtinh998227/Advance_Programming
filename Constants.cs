@@ -7,11 +7,14 @@ using System.Threading.Tasks;
 
 namespace KaraokeApp.Models
 {
-    class Constants
+    public class Constants
     {
-        public static Color RoomSelected = Color.FromArgb(158, 158, 158);
+        public static int userID=1;
+        public static Color RoomFull = Color.FromArgb(38, 198, 218);
         public static Color RoomEmpty = Color.WhiteSmoke;
         public static Color RomDate = Color.PaleVioletRed;
+        public static Color RomSelect = Color.ForestGreen;
+        public static String GetCurrentDateTime = GetCurrentTime();
         public class BILL_TYPE
         {
             public static string PAY = "PAY";
@@ -49,6 +52,15 @@ namespace KaraokeApp.Models
         {
             public static string VIP = "VIP";
             public static string NORMAL = "NORMAL";
+        }
+
+        static String GetCurrentTime()
+        {
+            return DateTime.Now.ToString();
+        }
+        static void SetUserID(int id)
+        {
+            userID = id;
         }
     }
 }

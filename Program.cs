@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using KaraokeApp.Views;
+using System.Windows.Forms;
 
 namespace KaraokeApp
 {

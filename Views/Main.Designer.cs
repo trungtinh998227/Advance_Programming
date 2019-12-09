@@ -34,44 +34,50 @@
             System.Windows.Forms.Button button2;
             this.panel1 = new System.Windows.Forms.Panel();
             this.controlRoom = new System.Windows.Forms.Panel();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.domainUpDown1 = new System.Windows.Forms.DomainUpDown();
             this.lvBill = new System.Windows.Forms.ListView();
+            this.foodName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.count = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.price = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.totalPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.fPanel_Room_VIP = new System.Windows.Forms.FlowLayoutPanel();
             this.fPanel_Room_Normal = new System.Windows.Forms.FlowLayoutPanel();
             this.cbTypePay = new System.Windows.Forms.ComboBox();
             this.cbChooseRoom = new System.Windows.Forms.ComboBox();
+            this.bntChangeRoom = new KaraokeApp.RoundedButton();
+            this.bntPrintBill = new KaraokeApp.RoundedButton();
+            this.bntPay = new KaraokeApp.RoundedButton();
+            this.roundPanel1 = new KaraokeApp.Custom_UI.RoundPanel();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.bnt_deleFood = new KaraokeApp.RoundedButton();
+            this.bntAddFood = new KaraokeApp.RoundedButton();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cbProduct = new System.Windows.Forms.ComboBox();
+            this.cbNameProduct = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.optionMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.billPrintItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageRoomItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accountingItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.billPrintItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accountMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.accountDetailItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addAccountItem = new System.Windows.Forms.ToolStripMenuItem();
             this.staffListItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logOutMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.bntChangeRoom = new KaraokeApp.RoundedButton();
-            this.bntPrintBill = new KaraokeApp.RoundedButton();
-            this.bntPay = new KaraokeApp.RoundedButton();
-            this.roundPanel1 = new KaraokeApp.Custom_UI.RoundPanel();
-            this.roundedButton1 = new KaraokeApp.RoundedButton();
-            this.bntAddFood = new KaraokeApp.RoundedButton();
-            this.label5 = new System.Windows.Forms.Label();
-            this.domainUpDown2 = new System.Windows.Forms.DomainUpDown();
-            this.cbProduct = new System.Windows.Forms.ComboBox();
-            this.cbNameProduct = new System.Windows.Forms.ComboBox();
             bnt_Exit = new System.Windows.Forms.Button();
             button1 = new System.Windows.Forms.Button();
             button2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.controlRoom.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.roundPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // bnt_Exit
@@ -144,9 +150,9 @@
             // 
             // controlRoom
             // 
+            this.controlRoom.Controls.Add(this.numericUpDown2);
             this.controlRoom.Controls.Add(this.label4);
             this.controlRoom.Controls.Add(this.label2);
-            this.controlRoom.Controls.Add(this.domainUpDown1);
             this.controlRoom.Controls.Add(this.lvBill);
             this.controlRoom.Controls.Add(this.fPanel_Room_VIP);
             this.controlRoom.Controls.Add(this.fPanel_Room_Normal);
@@ -159,10 +165,22 @@
             this.controlRoom.Controls.Add(this.label3);
             this.controlRoom.Controls.Add(this.label1);
             this.controlRoom.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.controlRoom.Location = new System.Drawing.Point(3, 31);
+            this.controlRoom.Location = new System.Drawing.Point(1, 31);
             this.controlRoom.Name = "controlRoom";
             this.controlRoom.Size = new System.Drawing.Size(1144, 682);
             this.controlRoom.TabIndex = 14;
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Location = new System.Drawing.Point(866, 571);
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(51, 20);
+            this.numericUpDown2.TabIndex = 0;
             // 
             // label4
             // 
@@ -178,22 +196,20 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(804, 572);
+            this.label2.Location = new System.Drawing.Point(795, 572);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 15);
             this.label2.TabIndex = 16;
             this.label2.Text = "Giảm giá";
             // 
-            // domainUpDown1
-            // 
-            this.domainUpDown1.Location = new System.Drawing.Point(874, 571);
-            this.domainUpDown1.Name = "domainUpDown1";
-            this.domainUpDown1.Size = new System.Drawing.Size(40, 20);
-            this.domainUpDown1.TabIndex = 17;
-            // 
             // lvBill
             // 
             this.lvBill.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(191)))), ((int)(((byte)(190)))));
+            this.lvBill.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.foodName,
+            this.count,
+            this.price,
+            this.totalPrice});
             this.lvBill.GridLines = true;
             this.lvBill.HideSelection = false;
             this.lvBill.Location = new System.Drawing.Point(582, 198);
@@ -201,7 +217,30 @@
             this.lvBill.Size = new System.Drawing.Size(521, 352);
             this.lvBill.TabIndex = 15;
             this.lvBill.UseCompatibleStateImageBehavior = false;
-            this.lvBill.View = System.Windows.Forms.View.List;
+            this.lvBill.View = System.Windows.Forms.View.Details;
+            // 
+            // foodName
+            // 
+            this.foodName.Text = "Tên món";
+            this.foodName.Width = 244;
+            // 
+            // count
+            // 
+            this.count.Text = "Số lượng";
+            this.count.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.count.Width = 76;
+            // 
+            // price
+            // 
+            this.price.Text = "Giá tiền";
+            this.price.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.price.Width = 83;
+            // 
+            // totalPrice
+            // 
+            this.totalPrice.Text = "Tổng tiền";
+            this.totalPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.totalPrice.Width = 114;
             // 
             // fPanel_Room_VIP
             // 
@@ -218,7 +257,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.fPanel_Room_Normal.AutoScroll = true;
-            this.fPanel_Room_Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(191)))), ((int)(((byte)(190)))));
+            this.fPanel_Room_Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(129)))), ((int)(((byte)(156)))), ((int)(((byte)(169)))));
             this.fPanel_Room_Normal.Location = new System.Drawing.Point(34, 32);
             this.fPanel_Room_Normal.Name = "fPanel_Room_Normal";
             this.fPanel_Room_Normal.Size = new System.Drawing.Size(527, 316);
@@ -248,6 +287,136 @@
             this.cbChooseRoom.Size = new System.Drawing.Size(121, 21);
             this.cbChooseRoom.TabIndex = 11;
             this.cbChooseRoom.Text = "Chọn phòng";
+            // 
+            // bntChangeRoom
+            // 
+            this.bntChangeRoom.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bntChangeRoom.Enabled = false;
+            this.bntChangeRoom.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bntChangeRoom.Location = new System.Drawing.Point(631, 606);
+            this.bntChangeRoom.Name = "bntChangeRoom";
+            this.bntChangeRoom.Size = new System.Drawing.Size(139, 48);
+            this.bntChangeRoom.TabIndex = 8;
+            this.bntChangeRoom.Text = "Đổi phòng";
+            this.bntChangeRoom.UseVisualStyleBackColor = true;
+            // 
+            // bntPrintBill
+            // 
+            this.bntPrintBill.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bntPrintBill.Enabled = false;
+            this.bntPrintBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bntPrintBill.Location = new System.Drawing.Point(792, 606);
+            this.bntPrintBill.Name = "bntPrintBill";
+            this.bntPrintBill.Size = new System.Drawing.Size(134, 48);
+            this.bntPrintBill.TabIndex = 7;
+            this.bntPrintBill.Text = "In hóa đơn";
+            this.bntPrintBill.UseVisualStyleBackColor = true;
+            // 
+            // bntPay
+            // 
+            this.bntPay.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bntPay.Enabled = false;
+            this.bntPay.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bntPay.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.bntPay.Location = new System.Drawing.Point(944, 606);
+            this.bntPay.Name = "bntPay";
+            this.bntPay.Size = new System.Drawing.Size(134, 48);
+            this.bntPay.TabIndex = 7;
+            this.bntPay.Text = "Thanh toán";
+            this.bntPay.UseVisualStyleBackColor = true;
+            // 
+            // roundPanel1
+            // 
+            this.roundPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(129)))), ((int)(((byte)(156)))), ((int)(((byte)(169)))));
+            this.roundPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.roundPanel1.BorderColor = System.Drawing.Color.Transparent;
+            this.roundPanel1.Controls.Add(this.numericUpDown1);
+            this.roundPanel1.Controls.Add(this.bnt_deleFood);
+            this.roundPanel1.Controls.Add(this.bntAddFood);
+            this.roundPanel1.Controls.Add(this.label5);
+            this.roundPanel1.Controls.Add(this.cbProduct);
+            this.roundPanel1.Controls.Add(this.cbNameProduct);
+            this.roundPanel1.Edge = 20;
+            this.roundPanel1.Location = new System.Drawing.Point(582, 32);
+            this.roundPanel1.Name = "roundPanel1";
+            this.roundPanel1.Size = new System.Drawing.Size(521, 124);
+            this.roundPanel1.TabIndex = 4;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(372, 53);
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(40, 20);
+            this.numericUpDown1.TabIndex = 0;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // bnt_deleFood
+            // 
+            this.bnt_deleFood.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bnt_deleFood.Enabled = false;
+            this.bnt_deleFood.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bnt_deleFood.Location = new System.Drawing.Point(424, 63);
+            this.bnt_deleFood.Name = "bnt_deleFood";
+            this.bnt_deleFood.Size = new System.Drawing.Size(77, 43);
+            this.bnt_deleFood.TabIndex = 3;
+            this.bnt_deleFood.Text = "Xóa";
+            this.bnt_deleFood.UseVisualStyleBackColor = true;
+            // 
+            // bntAddFood
+            // 
+            this.bntAddFood.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bntAddFood.Enabled = false;
+            this.bntAddFood.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bntAddFood.Location = new System.Drawing.Point(424, 14);
+            this.bntAddFood.Name = "bntAddFood";
+            this.bntAddFood.Size = new System.Drawing.Size(77, 43);
+            this.bntAddFood.TabIndex = 3;
+            this.bntAddFood.Text = "Thêm";
+            this.bntAddFood.UseVisualStyleBackColor = true;
+            this.bntAddFood.Click += new System.EventHandler(this.bntAddFood_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(303, 54);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(64, 15);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Số lượng";
+            // 
+            // cbProduct
+            // 
+            this.cbProduct.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cbProduct.FormattingEnabled = true;
+            this.cbProduct.Items.AddRange(new object[] {
+            "Thức ăn",
+            "Nước uống"});
+            this.cbProduct.Location = new System.Drawing.Point(22, 31);
+            this.cbProduct.Name = "cbProduct";
+            this.cbProduct.Size = new System.Drawing.Size(269, 21);
+            this.cbProduct.TabIndex = 1;
+            this.cbProduct.Text = "Sản phẩm";
+            this.cbProduct.SelectedIndexChanged += new System.EventHandler(this.cbProduct_SelectedIndexChanged);
+            // 
+            // cbNameProduct
+            // 
+            this.cbNameProduct.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cbNameProduct.FormattingEnabled = true;
+            this.cbNameProduct.Location = new System.Drawing.Point(22, 73);
+            this.cbNameProduct.Name = "cbNameProduct";
+            this.cbNameProduct.Size = new System.Drawing.Size(269, 21);
+            this.cbNameProduct.TabIndex = 1;
+            this.cbNameProduct.Text = "Tên sản phẩm";
             // 
             // label3
             // 
@@ -295,13 +464,19 @@
             this.optionMenu.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("optionMenu.BackgroundImage")));
             this.optionMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.optionMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.billPrintItem,
             this.manageRoomItem,
             this.manageMenuItem,
-            this.accountingItem,
-            this.billPrintItem});
+            this.accountingItem});
             this.optionMenu.Name = "optionMenu";
             this.optionMenu.Size = new System.Drawing.Size(68, 20);
             this.optionMenu.Text = "Tùy chọn";
+            // 
+            // billPrintItem
+            // 
+            this.billPrintItem.Name = "billPrintItem";
+            this.billPrintItem.Size = new System.Drawing.Size(170, 22);
+            this.billPrintItem.Text = "Trang chủ";
             // 
             // manageRoomItem
             // 
@@ -320,12 +495,6 @@
             this.accountingItem.Name = "accountingItem";
             this.accountingItem.Size = new System.Drawing.Size(170, 22);
             this.accountingItem.Text = "Thống kê";
-            // 
-            // billPrintItem
-            // 
-            this.billPrintItem.Name = "billPrintItem";
-            this.billPrintItem.Size = new System.Drawing.Size(170, 22);
-            this.billPrintItem.Text = "In hóa đơn";
             // 
             // accountMenu
             // 
@@ -361,122 +530,6 @@
             this.logOutMenu.Size = new System.Drawing.Size(76, 20);
             this.logOutMenu.Text = "Đăng xuất";
             // 
-            // bntChangeRoom
-            // 
-            this.bntChangeRoom.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bntChangeRoom.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bntChangeRoom.Location = new System.Drawing.Point(631, 606);
-            this.bntChangeRoom.Name = "bntChangeRoom";
-            this.bntChangeRoom.Size = new System.Drawing.Size(139, 48);
-            this.bntChangeRoom.TabIndex = 8;
-            this.bntChangeRoom.Text = "Đổi phòng";
-            this.bntChangeRoom.UseVisualStyleBackColor = true;
-            // 
-            // bntPrintBill
-            // 
-            this.bntPrintBill.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bntPrintBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bntPrintBill.Location = new System.Drawing.Point(792, 606);
-            this.bntPrintBill.Name = "bntPrintBill";
-            this.bntPrintBill.Size = new System.Drawing.Size(134, 48);
-            this.bntPrintBill.TabIndex = 7;
-            this.bntPrintBill.Text = "In hóa đơn";
-            this.bntPrintBill.UseVisualStyleBackColor = true;
-            // 
-            // bntPay
-            // 
-            this.bntPay.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bntPay.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bntPay.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.bntPay.Location = new System.Drawing.Point(944, 606);
-            this.bntPay.Name = "bntPay";
-            this.bntPay.Size = new System.Drawing.Size(134, 48);
-            this.bntPay.TabIndex = 7;
-            this.bntPay.Text = "Thanh toán";
-            this.bntPay.UseVisualStyleBackColor = true;
-            // 
-            // roundPanel1
-            // 
-            this.roundPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(129)))), ((int)(((byte)(156)))), ((int)(((byte)(169)))));
-            this.roundPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.roundPanel1.BorderColor = System.Drawing.Color.Transparent;
-            this.roundPanel1.Controls.Add(this.roundedButton1);
-            this.roundPanel1.Controls.Add(this.bntAddFood);
-            this.roundPanel1.Controls.Add(this.label5);
-            this.roundPanel1.Controls.Add(this.domainUpDown2);
-            this.roundPanel1.Controls.Add(this.cbProduct);
-            this.roundPanel1.Controls.Add(this.cbNameProduct);
-            this.roundPanel1.Edge = 20;
-            this.roundPanel1.Location = new System.Drawing.Point(582, 32);
-            this.roundPanel1.Name = "roundPanel1";
-            this.roundPanel1.Size = new System.Drawing.Size(521, 124);
-            this.roundPanel1.TabIndex = 4;
-            // 
-            // roundedButton1
-            // 
-            this.roundedButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.roundedButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.roundedButton1.Location = new System.Drawing.Point(424, 63);
-            this.roundedButton1.Name = "roundedButton1";
-            this.roundedButton1.Size = new System.Drawing.Size(77, 43);
-            this.roundedButton1.TabIndex = 3;
-            this.roundedButton1.Text = "Xóa";
-            this.roundedButton1.UseVisualStyleBackColor = true;
-            // 
-            // bntAddFood
-            // 
-            this.bntAddFood.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bntAddFood.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bntAddFood.Location = new System.Drawing.Point(424, 14);
-            this.bntAddFood.Name = "bntAddFood";
-            this.bntAddFood.Size = new System.Drawing.Size(77, 43);
-            this.bntAddFood.TabIndex = 3;
-            this.bntAddFood.Text = "Thêm";
-            this.bntAddFood.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(303, 54);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(64, 15);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Số lượng";
-            // 
-            // domainUpDown2
-            // 
-            this.domainUpDown2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.domainUpDown2.Location = new System.Drawing.Point(373, 53);
-            this.domainUpDown2.Name = "domainUpDown2";
-            this.domainUpDown2.Size = new System.Drawing.Size(40, 20);
-            this.domainUpDown2.TabIndex = 2;
-            this.domainUpDown2.Text = "1";
-            // 
-            // cbProduct
-            // 
-            this.cbProduct.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cbProduct.FormattingEnabled = true;
-            this.cbProduct.Items.AddRange(new object[] {
-            "Thức ăn",
-            "Nước uống"});
-            this.cbProduct.Location = new System.Drawing.Point(22, 31);
-            this.cbProduct.Name = "cbProduct";
-            this.cbProduct.Size = new System.Drawing.Size(269, 21);
-            this.cbProduct.TabIndex = 1;
-            this.cbProduct.Text = "Sản phẩm";
-            this.cbProduct.SelectedIndexChanged += new System.EventHandler(this.cbProduct_SelectedIndexChanged);
-            // 
-            // cbNameProduct
-            // 
-            this.cbNameProduct.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cbNameProduct.FormattingEnabled = true;
-            this.cbNameProduct.Location = new System.Drawing.Point(22, 73);
-            this.cbNameProduct.Name = "cbNameProduct";
-            this.cbNameProduct.Size = new System.Drawing.Size(269, 21);
-            this.cbNameProduct.TabIndex = 1;
-            this.cbNameProduct.Text = "Tên sản phẩm";
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -489,15 +542,16 @@
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Main";
-            this.Load += new System.EventHandler(this.Main_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.controlRoom.ResumeLayout(false);
             this.controlRoom.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.roundPanel1.ResumeLayout(false);
             this.roundPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -519,12 +573,11 @@
         private System.Windows.Forms.ToolStripMenuItem staffListItem;
         private System.Windows.Forms.Label label1;
         private RoundedButton bntAddFood;
-        private System.Windows.Forms.DomainUpDown domainUpDown2;
         private System.Windows.Forms.ComboBox cbNameProduct;
         private System.Windows.Forms.ComboBox cbProduct;
         private System.Windows.Forms.Label label5;
         private Custom_UI.RoundPanel roundPanel1;
-        private RoundedButton roundedButton1;
+        private RoundedButton bnt_deleFood;
         private RoundedButton bntChangeRoom;
         private RoundedButton bntPay;
         private System.Windows.Forms.ComboBox cbChooseRoom;
@@ -535,7 +588,12 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ListView lvBill;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DomainUpDown domainUpDown1;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ColumnHeader foodName;
+        private System.Windows.Forms.ColumnHeader count;
+        private System.Windows.Forms.ColumnHeader price;
+        private System.Windows.Forms.ColumnHeader totalPrice;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }

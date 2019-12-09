@@ -9,34 +9,31 @@ using System.Threading.Tasks;
 namespace KaraokeApp.Models
 {
     [Table("Account_Room")]
-    class Account_Room
+    public class Account_Room
     {
         public Account_Room()
         {
 
         }
-
-        public Account_Room(DateTime checkIn, DateTime checkOut, string guestPhone, string dayType, float discount, int totalPrice)
+        public Account_Room( DateTime checkIn,int room_Id, int acc_ID )
         {
+            account_ID = acc_ID;
+            room_ID = room_Id;
             CheckIn = checkIn;
-            CheckOut = checkOut;
-            GuestPhone = guestPhone;
-            DayType = dayType;
-            Discount = discount;
-            TotalPrice = totalPrice;
+            CheckOut = null;
         }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
         public DateTime CheckIn { get; set; }
-        public DateTime CheckOut { get; set; }
-        public String GuestPhone { get; set; }
-        public String DayType { get; set; }
-        public float Discount { get; set; }
-        public int TotalPrice { get; set; }
+        public DateTime? CheckOut { get; set; }
+        public float? Discount { get; set; }
+        public int? TotalPrice { get; set; }
+        public int account_ID { get; set; }
+        public int room_ID { get; set; }
 
-        public Account account { get; set; }
-        public Room room { get; set; }
+        public virtual Account account { get; set; }
+        public virtual Room room { get; set; }
     }
 }

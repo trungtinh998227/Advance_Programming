@@ -9,11 +9,16 @@ namespace KaraokeApp.Controllers
 {
     class Food_RoomDAO
     {
-        private KaraokeContext db;
-        public Food_RoomDAO(KaraokeContext context)
+        private static Food_RoomDAO instance;
+        private KaraokeContext db = KaraokeContext.Instance;
+        private Food_RoomDAO() { }
+
+        internal static Food_RoomDAO Instance
         {
-            this.db = context;
+            get { if (instance == null) instance = new Food_RoomDAO(); return Food_RoomDAO.instance; }
+            set => instance = value;
         }
+
         public void AddFood_Room(Food_Room food_Room)
         {
             try

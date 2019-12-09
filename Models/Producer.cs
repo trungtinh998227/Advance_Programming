@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace KaraokeApp.Models
 {
-    class Producer
+    public class Producer
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

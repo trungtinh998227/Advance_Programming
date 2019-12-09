@@ -6,10 +6,14 @@ namespace KaraokeApp.Controllers
 {
     class ProducerDAO
     {
-        private KaraokeContext db;
-        public ProducerDAO(KaraokeContext context)
+        private static ProducerDAO instance;
+        private KaraokeContext db = KaraokeContext.Instance;
+        private ProducerDAO() { }
+
+        internal static ProducerDAO Instance
         {
-            this.db = context;
+            get { if (instance == null) instance = new ProducerDAO(); return ProducerDAO.instance; }
+            set => instance = value;
         }
 
         public void AddProducer(Producer producer)

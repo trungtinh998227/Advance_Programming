@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace KaraokeApp.Models
 {
     [Table("Account")]
-    class Account
+    public class Account
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -27,7 +27,7 @@ namespace KaraokeApp.Models
             Address = address;
             Position = possition;
         }
-
-        public ICollection<Account_Room> account_Rooms { get; set; }
+        [ForeignKey("account_ID")]
+        public virtual ICollection<Account_Room> account_Rooms { get; set; }
     }
 }

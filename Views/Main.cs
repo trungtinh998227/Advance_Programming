@@ -1,7 +1,9 @@
 ﻿using KaraokeApp.Controllers;
 using KaraokeApp.Models;
+using KaraokeApp.Views;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -11,9 +13,6 @@ namespace KaraokeApp
     {
         static int RoomWidth = 160;
         static int RoomHeight = 90;
-        static KaraokeContext context = new KaraokeContext();
-        RoomDAO roomDAO = new RoomDAO(context);
-        FoodDAO foodDAO = new FoodDAO(context);
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
         (
@@ -37,15 +36,12 @@ namespace KaraokeApp
             this.Close();
         }
 
-        private void Main_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void LoadRoom()
         {
-            List<Room> roomNormals = roomDAO.GetRoomNormal();
-            List<Room> roomVIPs = roomDAO.GetRoomVIP();
+            fPanel_Room_Normal.Controls.Clear();
+            fPanel_Room_VIP.Controls.Clear();
+            List<Room> roomNormals = RoomDAO.Instance.GetRoomNormal();
+            List<Room> roomVIPs = RoomDAO.Instance.GetRoomVIP();
             foreach (Room room in roomNormals)
             {
                 ToolTip tt = new ToolTip() { ToolTipTitle = "Hướng dẫn:", ToolTipIcon = ToolTipIcon.Info };
@@ -53,11 +49,13 @@ namespace KaraokeApp
                 tt.SetToolTip(bnt_Normal, "\"Double Click\" để đặt phòng!");
                 bnt_Normal.Text = room.Name + Environment.NewLine + room.RoomStatus;
                 bnt_Normal.Tag = room;
+                bnt_Normal.DoubleClick += Bnt_Normal_Double_Click;
                 bnt_Normal.Click += Bnt_Normal_Click;
+                bnt_Normal.LostFocus += bnt_Normal_LostFocus;
                 switch (room.RoomStatus)
                 {
                     case nameof(Constants.ROOM_STATUS.FULL):
-                        bnt_Normal.BackColor = Constants.RoomSelected;
+                        bnt_Normal.BackColor = Constants.RoomFull;
                         break;
                     case nameof(Constants.ROOM_STATUS.DATE):
                         bnt_Normal.BackColor = Constants.RomDate;
@@ -75,11 +73,13 @@ namespace KaraokeApp
                 tt.SetToolTip(bnt_VIP, "\"Double Click\" để đặt phòng!");
                 bnt_VIP.Text = room.Name + Environment.NewLine + room.RoomStatus;
                 bnt_VIP.Tag = room;
-                bnt_VIP.Click += Bnt_VIP_Click;    
+                bnt_VIP.DoubleClick += Bnt_VIP_Double_Click;
+                bnt_VIP.Click += Bnt_VIP_Click;
+                bnt_VIP.LostFocus += bnt_VIP_LostFocus;
                 switch (room.RoomStatus)
                 {
                     case nameof(Constants.ROOM_STATUS.FULL):
-                        bnt_VIP.BackColor = Constants.RoomSelected;
+                        bnt_VIP.BackColor = Constants.RoomFull;
                         break;
                     case nameof(Constants.ROOM_STATUS.DATE):
                         bnt_VIP.BackColor = Constants.RomDate;
@@ -92,14 +92,51 @@ namespace KaraokeApp
             }
         }
 
+        private void bnt_VIP_LostFocus(object sender, EventArgs e)
+        {
+            (sender as Button).ForeColor = Color.Black;
+            bntAddFood.Enabled = false;
+            bnt_deleFood.Enabled = false;
+        }
+
+        private void bnt_Normal_LostFocus(object sender, EventArgs e)
+        {
+            (sender as Button).ForeColor = Color.Black;
+            bntAddFood.Enabled = false;
+            bnt_deleFood.Enabled = false;
+        }
+
         private void Bnt_VIP_Click(object sender, EventArgs e)
         {
-
+            (sender as Button).ForeColor = Constants.RomSelect;
+            bntAddFood.Enabled = true;
+            bnt_deleFood.Enabled = true;
         }
 
         private void Bnt_Normal_Click(object sender, EventArgs e)
         {
-            
+            (sender as Button).ForeColor = Constants.RomSelect;
+            bntAddFood.Enabled = true;
+            bnt_deleFood.Enabled = true;
+        }
+
+        private void Bnt_VIP_Double_Click(object sender, EventArgs e)
+        {
+            Manage_Room manage = new Manage_Room((sender as Button).Tag as Room);
+            manage.FormClosed += Manage_FormClosed;
+            manage.ShowDialog();
+        }
+
+        private void Bnt_Normal_Double_Click(object sender, EventArgs e)
+        {
+            Manage_Room manage = new Manage_Room((sender as Button).Tag as Room);
+            manage.FormClosed += Manage_FormClosed;
+            manage.ShowDialog();
+        }
+
+        private void Manage_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            LoadRoom();
         }
 
         private void controlRoom_Paint(object sender, PaintEventArgs e)
@@ -112,8 +149,8 @@ namespace KaraokeApp
             if (cbProduct.Text.Equals("Thức ăn"))
             {
                 cbNameProduct.Items.Clear();
-                var foods = foodDAO.GetFoods();
-                foreach(Food food in foods)
+                var foods = FoodDAO.Instance.GetFoods();
+                foreach (Food food in foods)
                 {
                     cbNameProduct.Items.Add(food.Name);
                 }
@@ -121,11 +158,24 @@ namespace KaraokeApp
             if (cbProduct.Text.Equals("Nước uống"))
             {
                 cbNameProduct.Items.Clear();
-                var foods = foodDAO.GetDrinks();
+                var foods = FoodDAO.Instance.GetDrinks();
                 foreach (Food drink in foods)
                 {
                     cbNameProduct.Items.Add(drink.Name);
                 }
+            }
+        }
+
+        private void bntAddFood_Click(object sender, EventArgs e)
+        {
+            var food = FoodDAO.Instance.GetFoodByName(cbNameProduct.Text);
+            if (food != null)
+            {
+                lvBill.
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn món", "Lưu ý", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

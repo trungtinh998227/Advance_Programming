@@ -62,7 +62,6 @@
     <Compile Include="Controllers\DefaultData.cs" />
     <Compile Include="Controllers\FoodDAO.cs" />
     <Compile Include="Controllers\Food_RoomDAO.cs" />
-    <Compile Include="Controllers\getCurrentDate.cs" />
     <Compile Include="Controllers\ProducerDAO.cs" />
     <Compile Include="Custom_UI\RoundedRectangleF.cs" />
     <Compile Include="Custom_UI\RoundPanel.cs">
@@ -98,6 +97,12 @@
     <Compile Include="Custom_UI\RoundTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Views\Manage_Room.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Manage_Room.Designer.cs">
+      <DependentUpon>Manage_Room.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Views\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -113,6 +118,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\Manage_Room.resx">
+      <DependentUpon>Manage_Room.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

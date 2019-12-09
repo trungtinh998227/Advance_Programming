@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace KaraokeApp.Models
 {
-    class Food
+    public class Food
     {
         public Food() { }
 
@@ -36,7 +36,7 @@ namespace KaraokeApp.Models
         [Required]
         public String FoodType { get; set; }
 
-        public ICollection<Food_Room> food_Room { get; set; }
+        public virtual ICollection<Food_Room> food_Room { get; set; }
         public virtual Producer producers { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace KaraokeApp.Models
 {
     [Table("Room")]
-    class Room
+    public class Room
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -25,8 +25,8 @@ namespace KaraokeApp.Models
             RoomType = roomType;
             Price = price;
         }
-
-        public ICollection<Account_Room> account_Rooms { get; set; }
-        public ICollection<Food_Room> food_Rooms { get; set; }
+        [ForeignKey("room_ID")]
+        public virtual ICollection<Account_Room> account_Rooms { get; set; }
+        public virtual ICollection<Food_Room> food_Rooms { get; set; }
     }
 }

@@ -6,14 +6,16 @@ namespace KaraokeApp.Models
 {
     class RoomDAO
     {
-        private KaraokeContext db;
+        private KaraokeContext db = KaraokeContext.Instance;
+        private static RoomDAO instance;
+
+        internal static RoomDAO Instance {
+            get { if (instance == null) instance = new RoomDAO(); return RoomDAO.instance; } 
+            set => instance = value; 
+        }
 
         public RoomDAO(){ }
 
-        public RoomDAO(KaraokeContext context)
-        {
-            this.db = context;
-        }
 
         public void AddRoom(Room room)
         {
@@ -26,6 +28,25 @@ namespace KaraokeApp.Models
             {
                 e.ToString();
             }
+        }
+
+        public void UpdateRoom(Room room)
+        {
+            try
+            {
+                //Get this room and update value
+                Room r = GetRoom(room.ID);
+                r.RoomStatus = room.RoomStatus;
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                e.ToString();
+            }
+        }
+        public Room GetRoom(int ID)
+        {
+            return db.Rooms.FirstOrDefault<Room>(r => r.ID == ID);
         }
         public IEnumerable<Room> GetRooms()
         {
