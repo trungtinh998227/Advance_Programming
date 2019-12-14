@@ -46,5 +46,13 @@ namespace KaraokeApp.Controllers
         {
             return db.Foods.FirstOrDefault(f => f.ID == id);
         }
+        public String GetFoodNameByID(int id)
+        {
+            return db.Foods.FirstOrDefault(f => f.ID == id).Name;
+        }
+        public String getStyleOfFoodByName(String name)
+        {
+            return db.Foods.FirstOrDefault(fn => fn.Name == name).FoodType;
+        }
     }
 }

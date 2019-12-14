@@ -35,7 +35,6 @@ namespace KaraokeApp.Models
         public int Price { get; set; }
         [Required]
         public String FoodType { get; set; }
-
         public virtual ICollection<Food_Room> food_Room { get; set; }
         public virtual Producer producers { get; set; }
     }

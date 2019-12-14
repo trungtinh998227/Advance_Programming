@@ -70,10 +70,17 @@
     <Compile Include="Custom_UI\Transparenter.cs" />
     <Compile Include="Controllers\RoomDAO.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Models\BillInfor.cs" />
     <Compile Include="Models\Food.cs" />
     <Compile Include="Models\Food_Room.cs" />
     <Compile Include="Models\Producer.cs" />
     <Compile Include="Models\Account_Room.cs" />
+    <Compile Include="Views\Bill_Infor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Bill_Infor.Designer.cs">
+      <DependentUpon>Bill_Infor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +110,9 @@
     <Compile Include="Views\Manage_Room.Designer.cs">
       <DependentUpon>Manage_Room.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\Bill_Infor.resx">
+      <DependentUpon>Bill_Infor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>

@@ -44,9 +44,27 @@ namespace KaraokeApp.Models
                 e.ToString();
             }
         }
+        public void UpdateRoom(int roomID, String status)
+        {
+            try
+            {
+                //Get this room and update value
+                Room r = GetRoom(roomID);
+                r.RoomStatus = status;
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                e.ToString();
+            }
+        }
         public Room GetRoom(int ID)
         {
             return db.Rooms.FirstOrDefault<Room>(r => r.ID == ID);
+        }
+        public Room GetRoom(String Name)
+        {
+            return db.Rooms.FirstOrDefault<Room>(r => r.Name == Name);
         }
         public IEnumerable<Room> GetRooms()
         {
@@ -63,6 +81,10 @@ namespace KaraokeApp.Models
         public List<Room> GetEmptyRoom()
         {
             return db.Rooms.Where(r => r.RoomStatus == Constants.ROOM_STATUS.EMPTY).ToList();
+        }
+        public List<Room> GetEmptyRoom(String roomTyle)
+        {
+            return db.Rooms.Where(r => r.RoomStatus == Constants.ROOM_STATUS.EMPTY && r.RoomType == roomTyle).ToList();
         }
     }
 }

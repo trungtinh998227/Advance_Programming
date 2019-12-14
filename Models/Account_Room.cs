@@ -30,6 +30,7 @@ namespace KaraokeApp.Models
         public DateTime? CheckOut { get; set; }
         public float? Discount { get; set; }
         public int? TotalPrice { get; set; }
+        public string PayType { get; set; }
         public int account_ID { get; set; }
         public int room_ID { get; set; }
 

@@ -9,7 +9,7 @@ namespace KaraokeApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Main());
+            Application.Run(new Bill_Infor());
         }
     }
 }

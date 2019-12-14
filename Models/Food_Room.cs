@@ -11,9 +11,8 @@ namespace KaraokeApp.Models
     public class Food_Room
     {
         public Food_Room() { }
-        public Food_Room(int iD, int amount, int totalPrice)
+        public Food_Room(int amount, int totalPrice)
         {
-            ID = iD;
             Amount = amount;
             TotalPrice = totalPrice;
         }

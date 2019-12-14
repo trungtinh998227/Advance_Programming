@@ -27,21 +27,18 @@ namespace KaraokeApp.Controllers
             catch(Exception e)
             {
                 e.ToString();
-            }
-                
+            } 
         }
-        public void RemoveLastValue()
+        public Account_Room GetAccount_Room(int roomID)
         {
-            try
-            {
-                Console.WriteLine(db.Account_Rooms.Max(s=>s.ID));
-                db.SaveChanges();
-            }
-            catch(Exception e)
-            {
-                e.ToString();
-            }
-            
+            Console.WriteLine(db.Account_Rooms.FirstOrDefault(ac => ac.room.ID == roomID).ToString());
+            return db.Account_Rooms.FirstOrDefault(ac => ac.room.ID == roomID);
+        }
+        public void updateAccR(int roomID, int newRoomID)
+        {
+            Account_Room arc = GetAccount_Room(roomID);
+            arc.room_ID = newRoomID;
+            db.SaveChanges();
         }
     }
 }

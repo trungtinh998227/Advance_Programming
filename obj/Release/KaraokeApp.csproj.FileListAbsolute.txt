@@ -29,3 +29,4 @@ D:\Advance_Programming\obj\Release\KaraokeApp.csproj.CopyComplete
 D:\Advance_Programming\obj\Release\KaraokeApp.exe
 D:\Advance_Programming\obj\Release\KaraokeApp.pdb
 D:\Advance_Programming\obj\Release\KaraokeApp.Views.Manage_Room.resources
+D:\Advance_Programming\obj\Release\KaraokeApp.Views.Bill_Infor.resources

@@ -39,10 +39,10 @@ namespace KaraokeApp
             invalidUser.Visible = false;
             InvalidPass.Visible = false;
             invalidAccount.Visible = false;
-/*            var data = new DefaultData(KaraokeContext.Instance);
+            var data = new DefaultData(KaraokeContext.Instance);
             data.AddAccount();
             data.AddRoom();
-            data.AddProducer_Food();*/
+            data.AddProducer_Food();
         }
 
         private void bnt_Exit_Click(object sender, EventArgs e)

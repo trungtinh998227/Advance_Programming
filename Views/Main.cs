@@ -13,6 +13,8 @@ namespace KaraokeApp
     {
         static int RoomWidth = 160;
         static int RoomHeight = 90;
+        static Boolean timed = true;
+        private Room room { get; set; }
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
         (
@@ -88,36 +90,47 @@ namespace KaraokeApp
                         bnt_VIP.BackColor = Constants.RoomEmpty;
                         break;
                 }
-                fPanel_Room_VIP.Controls.Add(bnt_VIP);
+                fPanel_Room_VIP.Controls.Add(bnt_VIP);     
             }
         }
 
         private void bnt_VIP_LostFocus(object sender, EventArgs e)
         {
-            (sender as Button).ForeColor = Color.Black;
-            bntAddFood.Enabled = false;
-            bnt_deleFood.Enabled = false;
+            if (!bntAddFood.Focused)
+            {
+                (sender as Button).ForeColor = Color.Black;
+            }
         }
 
         private void bnt_Normal_LostFocus(object sender, EventArgs e)
         {
-            (sender as Button).ForeColor = Color.Black;
-            bntAddFood.Enabled = false;
-            bnt_deleFood.Enabled = false;
+            if (fPanel_Room_Normal.Focused)
+            {
+                (sender as Button).ForeColor = Color.Black;
+            }
+            
         }
 
         private void Bnt_VIP_Click(object sender, EventArgs e)
         {
+            room = (sender as Button).Tag as Room;
+            cbProduct.Text = "Sản phẩm";
+            cbNameProduct.Text = "Tên sản phẩm";
+            UD_numberic.Value = 1;
+            reloadBillInf();
+            LoadListEmptyRoom(room.RoomType);
             (sender as Button).ForeColor = Constants.RomSelect;
-            bntAddFood.Enabled = true;
-            bnt_deleFood.Enabled = true;
         }
 
         private void Bnt_Normal_Click(object sender, EventArgs e)
         {
+            room = (sender as Button).Tag as Room;
+            cbProduct.Text = "Sản phẩm";
+            cbNameProduct.Text = "Tên sản phẩm";
+            UD_numberic.Value = 1;
+            reloadBillInf();
+            LoadListEmptyRoom(room.RoomType);
             (sender as Button).ForeColor = Constants.RomSelect;
-            bntAddFood.Enabled = true;
-            bnt_deleFood.Enabled = true;
         }
 
         private void Bnt_VIP_Double_Click(object sender, EventArgs e)
@@ -146,8 +159,10 @@ namespace KaraokeApp
 
         private void cbProduct_SelectedIndexChanged(object sender, EventArgs e)
         {
+            timed = true;
             if (cbProduct.Text.Equals("Thức ăn"))
             {
+                UD_numberic.Value = 1;
                 cbNameProduct.Items.Clear();
                 var foods = FoodDAO.Instance.GetFoods();
                 foreach (Food food in foods)
@@ -157,6 +172,7 @@ namespace KaraokeApp
             }
             if (cbProduct.Text.Equals("Nước uống"))
             {
+                UD_numberic.Value = 1;
                 cbNameProduct.Items.Clear();
                 var foods = FoodDAO.Instance.GetDrinks();
                 foreach (Food drink in foods)
@@ -168,15 +184,165 @@ namespace KaraokeApp
 
         private void bntAddFood_Click(object sender, EventArgs e)
         {
-            var food = FoodDAO.Instance.GetFoodByName(cbNameProduct.Text);
-            if (food != null)
+            if (timed)
             {
-                lvBill.
+                var food = FoodDAO.Instance.GetFoodByName(cbNameProduct.Text);
+                if (food != null && room.RoomStatus != Constants.ROOM_STATUS.EMPTY)
+                {
+                    var food_room = Food_RoomDAO.Instance.GetFood_RoomByID(room.ID, food.ID);
+                    if (food_room != null)
+                    {
+                        int newValue = food_room.Amount + Convert.ToInt32(UD_numberic.Value);
+                        Food_RoomDAO.Instance.UpdateFoodRoom(food_room.ID, newValue, newValue * food.Price);
+                    }
+                    else
+                    {
+                        Food_Room fr = new Food_Room(Convert.ToInt32(UD_numberic.Value), Convert.ToInt32(UD_numberic.Value) * food.Price);
+                        fr.room = room;
+                        fr.Food = food;
+                        Food_RoomDAO.Instance.AddFood_Room(fr);
+                    }
+                }
+                else if (room.RoomStatus == Constants.ROOM_STATUS.EMPTY)
+                {
+                    DialogResult dialogResult = MessageBox.Show("Bạn phải đặt phòng trước", "Lưu ý", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (dialogResult == DialogResult.OK)
+                    {
+                        this.ActiveControl = null;
+                    }
+                }
+                else
+                {
+                    DialogResult dialogResult = MessageBox.Show("Vui lòng chọn món", "Lưu ý", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (dialogResult == DialogResult.OK)
+                    {
+                        this.ActiveControl = null;
+                    }
+                }
+                reloadBillInf();
+            }
+            timed = false;
+        }
+        private void reloadBillInf()
+        {
+            int totalprice = 0;
+            lvBill.Items.Clear();
+            var dataListView = Food_RoomDAO.Instance.GetFood_RoomByRoomID(room.ID);
+            foreach (Food_Room fr in dataListView)
+            {
+                ListViewItem lvitems = new ListViewItem(FoodDAO.Instance.GetFoodNameByID(fr.Food.ID));
+                lvitems.SubItems.Add(fr.Amount.ToString());
+                lvitems.SubItems.Add(fr.TotalPrice.ToString("N2"));
+                totalprice += fr.TotalPrice;
+                lvBill.Items.Add(lvitems);
+            }
+            txbTotalPrice.Text = totalprice.ToString("N2")+ " VNĐ";
+        }
+
+        private void cbNameProduct_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            timed = true;
+            UD_numberic.Value = 1;
+            ToolTip toolTip = new ToolTip() { ToolTipTitle = "Giá tiền:", ToolTipIcon = ToolTipIcon.Info };
+            toolTip.SetToolTip(sender as ComboBox, FoodDAO.Instance.GetFoodByName(cbNameProduct.SelectedItem.ToString()).Price.ToString("N2"));
+        }
+
+        private void lvBill_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            timed = true;
+            if (lvBill.SelectedItems.Count > 0)
+            {
+                ListViewItem item = lvBill.SelectedItems[0];
+                cbNameProduct.Text = item.SubItems[0].Text;
+                if (FoodDAO.Instance.getStyleOfFoodByName(item.SubItems[0].Text) == Constants.FOOD_TYPE.DRINK)
+                {
+                    cbProduct.Text = cbProduct.Items[1].ToString();
+                } else cbProduct.Text = cbProduct.Items[0].ToString();
+
+                UD_numberic.Value = Convert.ToInt32(item.SubItems[1].Text);
+            }
+        }
+
+        private void bnt_deleFood_Click(object sender, EventArgs e)
+        {
+            if (timed)
+            {
+                var food = FoodDAO.Instance.GetFoodByName(cbNameProduct.Text);
+                var food_room = Food_RoomDAO.Instance.GetFood_RoomByID(room.ID, food.ID);
+                if (food_room != null)
+                {
+                    if (UD_numberic.Value < food_room.Amount)
+                    {
+                        int newValue = food_room.Amount - Convert.ToInt32(UD_numberic.Value);
+                        Food_RoomDAO.Instance.UpdateFoodRoom(food_room.ID, newValue, newValue * food.Price);
+                        reloadBillInf();
+                    }
+                    else
+                    {
+                        Food_RoomDAO.Instance.DeleteFoodRoom(food_room);
+                        reloadBillInf();
+                    }
+                }
+                timed = false;
+            }
+        }
+
+        private void UD_numberic_ValueChanged(object sender, EventArgs e)
+        {
+            timed = true;
+        }
+
+        private void LoadListEmptyRoom(String RoomType)
+        {
+            cbChooseRoom.Items.Clear();
+            if (RoomType == Constants.RoomType.NORMAL)
+            {
+                foreach (Room r in RoomDAO.Instance.GetEmptyRoom(Constants.RoomType.NORMAL))
+                {
+                    cbChooseRoom.Items.Add(r.Name);
+                }
             }
             else
             {
-                MessageBox.Show("Vui lòng chọn món", "Lưu ý", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                foreach (Room r in RoomDAO.Instance.GetEmptyRoom(Constants.RoomType.VIP))
+                {
+                    cbChooseRoom.Items.Add(r.Name);
+                }
             }
+        }
+
+        private void bntChangeRoom_Click(object sender, EventArgs e)
+        {
+            /*
+                Tạo ra 1 phòng mới :newRoom
+                - Lấy Account_room phòng hiện tại -> đổi roomID thành newRoomID
+                - Lấy các Food_room phòng hiện tại -> đổi roomID thành newRoomID
+                - Update trạng thái phòng hiện tại -> EMPTY
+                - Set trạng thái phòng mới thành FULL
+             */
+            Room newRoom = RoomDAO.Instance.GetRoom(cbChooseRoom.Text);
+            Account_RoomDAO.instance.updateAccR(room.ID,newRoom.ID);
+
+            List<Food_Room> lsiFR = Food_RoomDAO.Instance.GetFood_RoomByRoomID(room.ID);
+            foreach (Food_Room fr in lsiFR)
+            {
+                Food_RoomDAO.Instance.UpdateFoodRoom(fr, newRoom);
+            }
+            RoomDAO.Instance.UpdateRoom(room.ID,Constants.ROOM_STATUS.EMPTY);
+            newRoom.RoomStatus = Constants.ROOM_STATUS.FULL;
+            KaraokeContext.Instance.SaveChanges();
+            LoadRoom();
+        }
+
+        private void bntPay_Click(object sender, EventArgs e)
+        {
+            /*
+                Lấy time hiện tại gắn vào checkOut
+                Tính tổng giá phòng bằng cách (checkOut - checkInt) * roomPrice * (100-discount) + Acc_room.totalPrice
+                Tạo BillInfor gửi sang Form Bill_infor hiển thị chi tiết cho nhân viên check
+                -------------------------------------------------------------------------------------------------------
+                Form Bill_Infor close -> Cập nhật lại trạng thái phòng
+             */
         }
     }
 }
