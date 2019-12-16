@@ -34,6 +34,8 @@
             System.Windows.Forms.Button button1;
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.bntDate = new KaraokeApp.RoundedButton();
+            this.bntBookRoom = new KaraokeApp.RoundedButton();
             this.cb_Status = new System.Windows.Forms.ComboBox();
             this.txbTime = new System.Windows.Forms.TextBox();
             this.txb_RoomStyle = new System.Windows.Forms.TextBox();
@@ -43,8 +45,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.bntCancel = new KaraokeApp.RoundedButton();
-            this.bntBookRoom = new KaraokeApp.RoundedButton();
+            this.dateTimePicker_Date = new System.Windows.Forms.DateTimePicker();
             bnt_Exit = new System.Windows.Forms.Button();
             button2 = new System.Windows.Forms.Button();
             button1 = new System.Windows.Forms.Button();
@@ -121,7 +122,8 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.bntCancel);
+            this.panel2.Controls.Add(this.dateTimePicker_Date);
+            this.panel2.Controls.Add(this.bntDate);
             this.panel2.Controls.Add(this.bntBookRoom);
             this.panel2.Controls.Add(this.cb_Status);
             this.panel2.Controls.Add(this.txbTime);
@@ -137,6 +139,31 @@
             this.panel2.Size = new System.Drawing.Size(656, 265);
             this.panel2.TabIndex = 16;
             // 
+            // bntDate
+            // 
+            this.bntDate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bntDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bntDate.ForeColor = System.Drawing.Color.Red;
+            this.bntDate.Location = new System.Drawing.Point(465, 192);
+            this.bntDate.Name = "bntDate";
+            this.bntDate.Size = new System.Drawing.Size(128, 48);
+            this.bntDate.TabIndex = 8;
+            this.bntDate.Text = "Hẹn";
+            this.bntDate.UseVisualStyleBackColor = true;
+            this.bntDate.Click += new System.EventHandler(this.bntCancel_Click);
+            // 
+            // bntBookRoom
+            // 
+            this.bntBookRoom.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bntBookRoom.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bntBookRoom.Location = new System.Drawing.Point(309, 192);
+            this.bntBookRoom.Name = "bntBookRoom";
+            this.bntBookRoom.Size = new System.Drawing.Size(128, 48);
+            this.bntBookRoom.TabIndex = 8;
+            this.bntBookRoom.Text = "Đặt phòng";
+            this.bntBookRoom.UseVisualStyleBackColor = true;
+            this.bntBookRoom.Click += new System.EventHandler(this.bntBookRoom_Click);
+            // 
             // cb_Status
             // 
             this.cb_Status.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -145,25 +172,25 @@
             "EMPTY",
             "DATE",
             "FULL"});
-            this.cb_Status.Location = new System.Drawing.Point(479, 72);
+            this.cb_Status.Location = new System.Drawing.Point(469, 72);
             this.cb_Status.Name = "cb_Status";
-            this.cb_Status.Size = new System.Drawing.Size(114, 22);
+            this.cb_Status.Size = new System.Drawing.Size(138, 22);
             this.cb_Status.TabIndex = 2;
             this.cb_Status.SelectedIndexChanged += new System.EventHandler(this.cb_Status_SelectedIndexChanged);
             // 
             // txbTime
             // 
             this.txbTime.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbTime.Location = new System.Drawing.Point(479, 117);
+            this.txbTime.Location = new System.Drawing.Point(469, 117);
             this.txbTime.Name = "txbTime";
             this.txbTime.ReadOnly = true;
-            this.txbTime.Size = new System.Drawing.Size(114, 20);
+            this.txbTime.Size = new System.Drawing.Size(138, 20);
             this.txbTime.TabIndex = 1;
             // 
             // txb_RoomStyle
             // 
             this.txb_RoomStyle.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txb_RoomStyle.Location = new System.Drawing.Point(195, 116);
+            this.txb_RoomStyle.Location = new System.Drawing.Point(185, 116);
             this.txb_RoomStyle.Name = "txb_RoomStyle";
             this.txb_RoomStyle.ReadOnly = true;
             this.txb_RoomStyle.Size = new System.Drawing.Size(100, 20);
@@ -172,7 +199,7 @@
             // txb_RoomID
             // 
             this.txb_RoomID.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txb_RoomID.Location = new System.Drawing.Point(195, 74);
+            this.txb_RoomID.Location = new System.Drawing.Point(185, 74);
             this.txb_RoomID.Name = "txb_RoomID";
             this.txb_RoomID.ReadOnly = true;
             this.txb_RoomID.Size = new System.Drawing.Size(100, 20);
@@ -182,7 +209,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(334, 118);
+            this.label5.Location = new System.Drawing.Point(324, 118);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(121, 20);
             this.label5.TabIndex = 0;
@@ -192,7 +219,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(334, 73);
+            this.label4.Location = new System.Drawing.Point(324, 73);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(94, 20);
             this.label4.TabIndex = 0;
@@ -202,7 +229,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(50, 116);
+            this.label3.Location = new System.Drawing.Point(40, 116);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(103, 20);
             this.label3.TabIndex = 0;
@@ -212,7 +239,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(50, 74);
+            this.label2.Location = new System.Drawing.Point(40, 74);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(85, 20);
             this.label2.TabIndex = 0;
@@ -229,30 +256,13 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Thông tin phòng";
             // 
-            // bntCancel
+            // dateTimePicker_Date
             // 
-            this.bntCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bntCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bntCancel.ForeColor = System.Drawing.Color.Red;
-            this.bntCancel.Location = new System.Drawing.Point(465, 192);
-            this.bntCancel.Name = "bntCancel";
-            this.bntCancel.Size = new System.Drawing.Size(128, 48);
-            this.bntCancel.TabIndex = 8;
-            this.bntCancel.Text = "Hủy";
-            this.bntCancel.UseVisualStyleBackColor = true;
-            this.bntCancel.Click += new System.EventHandler(this.bntCancel_Click);
-            // 
-            // bntBookRoom
-            // 
-            this.bntBookRoom.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bntBookRoom.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bntBookRoom.Location = new System.Drawing.Point(309, 192);
-            this.bntBookRoom.Name = "bntBookRoom";
-            this.bntBookRoom.Size = new System.Drawing.Size(128, 48);
-            this.bntBookRoom.TabIndex = 8;
-            this.bntBookRoom.Text = "Đặt phòng";
-            this.bntBookRoom.UseVisualStyleBackColor = true;
-            this.bntBookRoom.Click += new System.EventHandler(this.bntBookRoom_Click);
+            this.dateTimePicker_Date.Location = new System.Drawing.Point(456, 118);
+            this.dateTimePicker_Date.Name = "dateTimePicker_Date";
+            this.dateTimePicker_Date.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker_Date.TabIndex = 10;
+            this.dateTimePicker_Date.Visible = false;
             // 
             // Manage_Room
             // 
@@ -286,7 +296,8 @@
         private System.Windows.Forms.ComboBox cb_Status;
         private System.Windows.Forms.TextBox txbTime;
         private System.Windows.Forms.TextBox txb_RoomStyle;
-        private RoundedButton bntCancel;
+        private RoundedButton bntDate;
         private RoundedButton bntBookRoom;
+        private System.Windows.Forms.DateTimePicker dateTimePicker_Date;
     }
 }

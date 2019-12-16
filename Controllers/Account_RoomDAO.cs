@@ -31,13 +31,27 @@ namespace KaraokeApp.Controllers
         }
         public Account_Room GetAccount_Room(int roomID)
         {
-            Console.WriteLine(db.Account_Rooms.FirstOrDefault(ac => ac.room.ID == roomID).ToString());
-            return db.Account_Rooms.FirstOrDefault(ac => ac.room.ID == roomID);
+            return db.Account_Rooms.FirstOrDefault(ac => ac.room.ID == roomID && ac.PayStatus != Constants.BILL_TYPE.PAY);
         }
         public void updateAccR(int roomID, int newRoomID)
         {
-            Account_Room arc = GetAccount_Room(roomID);
-            arc.room_ID = newRoomID;
+            try
+            {
+                Account_Room arc = GetAccount_Room(roomID);
+                arc.room_ID = newRoomID;
+                db.SaveChanges();
+            }catch(Exception e)
+            {
+                e.ToString();
+            }
+        }
+        public void UpdateAccountRoom(Account_Room account_Room)
+        {
+            var ac_r = db.Account_Rooms.FirstOrDefault(ac => ac.ID == account_Room.ID);
+            ac_r.CheckOut = account_Room.CheckOut;
+            ac_r.Discount = account_Room.Discount;
+            ac_r.TotalPrice = account_Room.TotalPrice;
+            ac_r.PayStatus = account_Room.PayStatus;
             db.SaveChanges();
         }
     }

@@ -28,9 +28,9 @@ namespace KaraokeApp.Models
         public int ID { get; set; }
         public DateTime CheckIn { get; set; }
         public DateTime? CheckOut { get; set; }
-        public float? Discount { get; set; }
+        public int? Discount { get; set; }
         public int? TotalPrice { get; set; }
-        public string PayType { get; set; }
+        public string PayStatus { get; set; }
         public int account_ID { get; set; }
         public int room_ID { get; set; }
 

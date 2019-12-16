@@ -22,8 +22,10 @@ namespace KaraokeApp.Models
         public int ID { get; set; }
         public int Amount { get; set; }
         public int TotalPrice { get; set; }
+        public int? BillInfor_ID { get; set; }
         
         public virtual Room room { get; set; }
         public virtual Food Food { get; set; }
+        public virtual BillInfor BillInfor { get; set; }
     }
 }

@@ -35,6 +35,7 @@ namespace KaraokeApp.Models
             public static string CASH = "CASH";
             public static string CARD = "CARD";
             public static string SAMSUNGPAY = "SAMSUNGPAY";
+            public static string MOMO = "MOMO";
         }
         public class POSITION_TYPE
         {

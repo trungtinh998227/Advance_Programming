@@ -24,5 +24,6 @@ namespace KaraokeApp.Models
         public virtual DbSet<Food_Room> Food_Rooms { get; set; }
         public virtual DbSet<Producer> Producers { get; set; }
         public virtual DbSet<Food> Foods { get; set; }
+        public virtual DbSet<BillInfor> BillInfors { get; set; }
     }
 }

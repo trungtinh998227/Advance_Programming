@@ -56,6 +56,11 @@ namespace KaraokeApp.Views
 
         private void bntCancel_Click(object sender, EventArgs e)
         {
+            var ac_r = new Account_Room(DateTime.Parse(dateTimePicker_Date.Value.ToString("MM/dd/yyyy")), room.ID, Constants.userID);
+            ac_r.PayStatus = Constants.BILL_TYPE.UNPAY;
+            Account_RoomDAO.instance.AddAccount_Room(ac_r);
+            room.RoomStatus = Constants.ROOM_STATUS.DATE;
+            RoomDAO.Instance.UpdateRoom(room);
             this.Close();
         }
 
@@ -65,10 +70,15 @@ namespace KaraokeApp.Views
             {
                 case nameof(Constants.ROOM_STATUS.EMPTY):
                     txbTime.Text = Constants.GetCurrentDateTime;
+                    dateTimePicker_Date.Visible = false;
+                    bntDate.Enabled = false;
+                    bntBookRoom.Enabled = true;
                     break;
                 case nameof(Constants.ROOM_STATUS.DATE):
                     room.RoomStatus = Constants.ROOM_STATUS.DATE;
-                    // Xử lý nhập ngày giờ hẹn
+                    dateTimePicker_Date.Visible = true;
+                    bntBookRoom.Enabled = false;
+                    bntDate.Enabled = true;
                     break;
                 default:
                     break;
@@ -78,6 +88,7 @@ namespace KaraokeApp.Views
         private void bntBookRoom_Click(object sender, EventArgs e)
         {
             var ac_r = new Account_Room(DateTime.Parse(txbTime.Text), room.ID, Constants.userID);
+            ac_r.PayStatus = Constants.BILL_TYPE.UNPAY;
             Account_RoomDAO.instance.AddAccount_Room(ac_r);
             room.RoomStatus = Constants.ROOM_STATUS.FULL;
             RoomDAO.Instance.UpdateRoom(room);

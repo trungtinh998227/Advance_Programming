@@ -1,4 +1,5 @@
-﻿using KaraokeApp.Views;
+﻿using KaraokeApp.Models;
+using KaraokeApp.Views;
 using System.Windows.Forms;
 
 namespace KaraokeApp
@@ -9,7 +10,7 @@ namespace KaraokeApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Bill_Infor());
+            Application.Run(new Main());
         }
     }
 }

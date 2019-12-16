@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountDAO.cs" />
     <Compile Include="Controllers\Account_RoomDAO.cs" />
+    <Compile Include="Controllers\BillInforDAO.cs" />
     <Compile Include="Controllers\DefaultData.cs" />
     <Compile Include="Controllers\FoodDAO.cs" />
     <Compile Include="Controllers\Food_RoomDAO.cs" />

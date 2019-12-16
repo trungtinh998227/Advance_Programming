@@ -34,6 +34,19 @@
             System.Windows.Forms.Button button2;
             this.panel1 = new System.Windows.Forms.Panel();
             this.controlRoom = new System.Windows.Forms.Panel();
+            this.manageRoom = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.roundedButton3 = new KaraokeApp.RoundedButton();
+            this.roundedButton2 = new KaraokeApp.RoundedButton();
+            this.bntAddRoom = new KaraokeApp.RoundedButton();
+            this.lvRoom = new System.Windows.Forms.ListView();
+            this.nameRoom = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.roomType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.romStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.roomPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.txbTotalPrice = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.UD_Discount = new System.Windows.Forms.NumericUpDown();
@@ -47,20 +60,6 @@
             this.fPanel_Room_Normal = new System.Windows.Forms.FlowLayoutPanel();
             this.cbTypePay = new System.Windows.Forms.ComboBox();
             this.cbChooseRoom = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.optionMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.billPrintItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.manageRoomItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.manageMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.accountingItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.accountMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.accountDetailItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addAccountItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.staffListItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.logOutMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.inHóaĐơnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bntChangeRoom = new KaraokeApp.RoundedButton();
             this.bntPay = new KaraokeApp.RoundedButton();
             this.roundPanel1 = new KaraokeApp.Custom_UI.RoundPanel();
@@ -70,15 +69,34 @@
             this.label5 = new System.Windows.Forms.Label();
             this.cbProduct = new System.Windows.Forms.ComboBox();
             this.cbNameProduct = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.optionMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.billPrintItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.inHóaĐơnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageRoomItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.accountingItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.accountMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.accountDetailItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addAccountItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.staffListItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logOutMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             bnt_Exit = new System.Windows.Forms.Button();
             button1 = new System.Windows.Forms.Button();
             button2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.controlRoom.SuspendLayout();
+            this.manageRoom.SuspendLayout();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UD_Discount)).BeginInit();
-            this.menuStrip1.SuspendLayout();
             this.roundPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UD_numberic)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // bnt_Exit
@@ -151,6 +169,7 @@
             // 
             // controlRoom
             // 
+            this.controlRoom.Controls.Add(this.manageRoom);
             this.controlRoom.Controls.Add(this.txbTotalPrice);
             this.controlRoom.Controls.Add(this.label6);
             this.controlRoom.Controls.Add(this.UD_Discount);
@@ -171,6 +190,139 @@
             this.controlRoom.Name = "controlRoom";
             this.controlRoom.Size = new System.Drawing.Size(1144, 682);
             this.controlRoom.TabIndex = 14;
+            // 
+            // manageRoom
+            // 
+            this.manageRoom.Controls.Add(this.panel2);
+            this.manageRoom.Controls.Add(this.lvRoom);
+            this.manageRoom.Controls.Add(this.label9);
+            this.manageRoom.Controls.Add(this.label8);
+            this.manageRoom.Controls.Add(this.label7);
+            this.manageRoom.Location = new System.Drawing.Point(3, 7);
+            this.manageRoom.Name = "manageRoom";
+            this.manageRoom.Size = new System.Drawing.Size(1138, 675);
+            this.manageRoom.TabIndex = 21;
+            this.manageRoom.Visible = false;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.panel2.Controls.Add(this.label12);
+            this.panel2.Controls.Add(this.label11);
+            this.panel2.Controls.Add(this.label10);
+            this.panel2.Controls.Add(this.roundedButton3);
+            this.panel2.Controls.Add(this.roundedButton2);
+            this.panel2.Controls.Add(this.bntAddRoom);
+            this.panel2.Location = new System.Drawing.Point(639, 109);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(473, 546);
+            this.panel2.TabIndex = 2;
+            // 
+            // roundedButton3
+            // 
+            this.roundedButton3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.roundedButton3.Location = new System.Drawing.Point(178, 439);
+            this.roundedButton3.Name = "roundedButton3";
+            this.roundedButton3.Size = new System.Drawing.Size(134, 68);
+            this.roundedButton3.TabIndex = 0;
+            this.roundedButton3.Text = "Sửa phòng";
+            this.roundedButton3.UseVisualStyleBackColor = true;
+            // 
+            // roundedButton2
+            // 
+            this.roundedButton2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.roundedButton2.ForeColor = System.Drawing.Color.Red;
+            this.roundedButton2.Location = new System.Drawing.Point(305, 359);
+            this.roundedButton2.Name = "roundedButton2";
+            this.roundedButton2.Size = new System.Drawing.Size(134, 68);
+            this.roundedButton2.TabIndex = 0;
+            this.roundedButton2.Text = "Xóa phòng";
+            this.roundedButton2.UseVisualStyleBackColor = true;
+            // 
+            // bntAddRoom
+            // 
+            this.bntAddRoom.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bntAddRoom.Location = new System.Drawing.Point(34, 359);
+            this.bntAddRoom.Name = "bntAddRoom";
+            this.bntAddRoom.Size = new System.Drawing.Size(134, 68);
+            this.bntAddRoom.TabIndex = 0;
+            this.bntAddRoom.Text = "Thêm phòng";
+            this.bntAddRoom.UseVisualStyleBackColor = true;
+            // 
+            // lvRoom
+            // 
+            this.lvRoom.AutoArrange = false;
+            this.lvRoom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.lvRoom.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.nameRoom,
+            this.roomType,
+            this.romStatus,
+            this.roomPrice});
+            this.lvRoom.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvRoom.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.lvRoom.HideSelection = false;
+            this.lvRoom.Location = new System.Drawing.Point(31, 109);
+            this.lvRoom.Name = "lvRoom";
+            this.lvRoom.Size = new System.Drawing.Size(560, 546);
+            this.lvRoom.TabIndex = 1;
+            this.lvRoom.UseCompatibleStateImageBehavior = false;
+            this.lvRoom.View = System.Windows.Forms.View.Details;
+            // 
+            // nameRoom
+            // 
+            this.nameRoom.Text = "Tên phòng";
+            this.nameRoom.Width = 135;
+            // 
+            // roomType
+            // 
+            this.roomType.Text = "Loại phòng";
+            this.roomType.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.roomType.Width = 132;
+            // 
+            // romStatus
+            // 
+            this.romStatus.Text = "Trạng thái phòng";
+            this.romStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.romStatus.Width = 155;
+            // 
+            // roomPrice
+            // 
+            this.roomPrice.Text = "Giá tiền";
+            this.roomPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.roomPrice.Width = 135;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.Black;
+            this.label9.Location = new System.Drawing.Point(801, 80);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(168, 25);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "Thông tin phòng";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.Black;
+            this.label8.Location = new System.Drawing.Point(213, 78);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(175, 25);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Danh sách phòng";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Times New Roman", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Red;
+            this.label7.Location = new System.Drawing.Point(502, 18);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(202, 35);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Quản lý phòng";
             // 
             // txbTotalPrice
             // 
@@ -208,7 +360,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(790, 171);
+            this.label4.Location = new System.Drawing.Point(790, 170);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(147, 18);
             this.label4.TabIndex = 18;
@@ -294,6 +446,7 @@
             this.cbTypePay.Size = new System.Drawing.Size(153, 21);
             this.cbTypePay.TabIndex = 12;
             this.cbTypePay.Text = "Hình thức thanh toán";
+            this.cbTypePay.SelectedIndexChanged += new System.EventHandler(this.cbTypePay_SelectedIndexChanged);
             // 
             // cbChooseRoom
             // 
@@ -305,125 +458,6 @@
             this.cbChooseRoom.Size = new System.Drawing.Size(121, 21);
             this.cbChooseRoom.TabIndex = 11;
             this.cbChooseRoom.Text = "Chọn phòng";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(31, 361);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(144, 15);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Danh sách phòng VIP";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Crimson;
-            this.label1.Location = new System.Drawing.Point(31, 7);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(167, 15);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Danh sách phòng thường";
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.menuStrip1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("menuStrip1.BackgroundImage")));
-            this.menuStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
-            this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.optionMenu,
-            this.accountMenu,
-            this.logOutMenu});
-            this.menuStrip1.Location = new System.Drawing.Point(3, 4);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(223, 24);
-            this.menuStrip1.TabIndex = 13;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // optionMenu
-            // 
-            this.optionMenu.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("optionMenu.BackgroundImage")));
-            this.optionMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.optionMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.billPrintItem,
-            this.inHóaĐơnToolStripMenuItem,
-            this.manageRoomItem,
-            this.manageMenuItem,
-            this.accountingItem});
-            this.optionMenu.Name = "optionMenu";
-            this.optionMenu.Size = new System.Drawing.Size(68, 20);
-            this.optionMenu.Text = "Tùy chọn";
-            // 
-            // billPrintItem
-            // 
-            this.billPrintItem.Name = "billPrintItem";
-            this.billPrintItem.Size = new System.Drawing.Size(180, 22);
-            this.billPrintItem.Text = "Trang chủ";
-            // 
-            // manageRoomItem
-            // 
-            this.manageRoomItem.Name = "manageRoomItem";
-            this.manageRoomItem.Size = new System.Drawing.Size(180, 22);
-            this.manageRoomItem.Text = "Quản lý phòng";
-            // 
-            // manageMenuItem
-            // 
-            this.manageMenuItem.Name = "manageMenuItem";
-            this.manageMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.manageMenuItem.Text = "Quản lý thực đơn";
-            // 
-            // accountingItem
-            // 
-            this.accountingItem.Name = "accountingItem";
-            this.accountingItem.Size = new System.Drawing.Size(180, 22);
-            this.accountingItem.Text = "Thống kê";
-            // 
-            // accountMenu
-            // 
-            this.accountMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.accountDetailItem,
-            this.addAccountItem,
-            this.staffListItem});
-            this.accountMenu.Name = "accountMenu";
-            this.accountMenu.Size = new System.Drawing.Size(71, 20);
-            this.accountMenu.Text = "Tài khoản";
-            // 
-            // accountDetailItem
-            // 
-            this.accountDetailItem.Name = "accountDetailItem";
-            this.accountDetailItem.Size = new System.Drawing.Size(187, 22);
-            this.accountDetailItem.Text = "Thông tin tài khoản";
-            // 
-            // addAccountItem
-            // 
-            this.addAccountItem.Name = "addAccountItem";
-            this.addAccountItem.Size = new System.Drawing.Size(187, 22);
-            this.addAccountItem.Text = "Thêm tài khoản";
-            // 
-            // staffListItem
-            // 
-            this.staffListItem.Name = "staffListItem";
-            this.staffListItem.Size = new System.Drawing.Size(187, 22);
-            this.staffListItem.Text = "Danh sách nhân viên";
-            // 
-            // logOutMenu
-            // 
-            this.logOutMenu.Name = "logOutMenu";
-            this.logOutMenu.Size = new System.Drawing.Size(76, 20);
-            this.logOutMenu.Text = "Đăng xuất";
-            // 
-            // inHóaĐơnToolStripMenuItem
-            // 
-            this.inHóaĐơnToolStripMenuItem.Name = "inHóaĐơnToolStripMenuItem";
-            this.inHóaĐơnToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.inHóaĐơnToolStripMenuItem.Text = "In hóa đơn";
             // 
             // bntChangeRoom
             // 
@@ -544,6 +578,163 @@
             this.cbNameProduct.Text = "Tên sản phẩm";
             this.cbNameProduct.SelectedIndexChanged += new System.EventHandler(this.cbNameProduct_SelectedIndexChanged);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Red;
+            this.label3.Location = new System.Drawing.Point(31, 361);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(144, 15);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Danh sách phòng VIP";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Crimson;
+            this.label1.Location = new System.Drawing.Point(31, 7);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(167, 15);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Danh sách phòng thường";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.menuStrip1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("menuStrip1.BackgroundImage")));
+            this.menuStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.optionMenu,
+            this.accountMenu,
+            this.logOutMenu});
+            this.menuStrip1.Location = new System.Drawing.Point(3, 4);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.menuStrip1.Size = new System.Drawing.Size(223, 24);
+            this.menuStrip1.TabIndex = 13;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // optionMenu
+            // 
+            this.optionMenu.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("optionMenu.BackgroundImage")));
+            this.optionMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.optionMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.billPrintItem,
+            this.inHóaĐơnToolStripMenuItem,
+            this.manageRoomItem,
+            this.manageMenuItem,
+            this.accountingItem});
+            this.optionMenu.Name = "optionMenu";
+            this.optionMenu.Size = new System.Drawing.Size(68, 20);
+            this.optionMenu.Text = "Tùy chọn";
+            // 
+            // billPrintItem
+            // 
+            this.billPrintItem.Name = "billPrintItem";
+            this.billPrintItem.Size = new System.Drawing.Size(170, 22);
+            this.billPrintItem.Text = "Trang chủ";
+            // 
+            // inHóaĐơnToolStripMenuItem
+            // 
+            this.inHóaĐơnToolStripMenuItem.Name = "inHóaĐơnToolStripMenuItem";
+            this.inHóaĐơnToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.inHóaĐơnToolStripMenuItem.Text = "In hóa đơn";
+            this.inHóaĐơnToolStripMenuItem.Click += new System.EventHandler(this.inHóaĐơnToolStripMenuItem_Click);
+            // 
+            // manageRoomItem
+            // 
+            this.manageRoomItem.Name = "manageRoomItem";
+            this.manageRoomItem.Size = new System.Drawing.Size(170, 22);
+            this.manageRoomItem.Text = "Quản lý phòng";
+            this.manageRoomItem.Click += new System.EventHandler(this.manageRoomItem_Click);
+            // 
+            // manageMenuItem
+            // 
+            this.manageMenuItem.Name = "manageMenuItem";
+            this.manageMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.manageMenuItem.Text = "Quản lý thực đơn";
+            this.manageMenuItem.Click += new System.EventHandler(this.manageMenuItem_Click);
+            // 
+            // accountingItem
+            // 
+            this.accountingItem.Name = "accountingItem";
+            this.accountingItem.Size = new System.Drawing.Size(170, 22);
+            this.accountingItem.Text = "Thống kê";
+            this.accountingItem.Click += new System.EventHandler(this.accountingItem_Click);
+            // 
+            // accountMenu
+            // 
+            this.accountMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.accountDetailItem,
+            this.addAccountItem,
+            this.staffListItem});
+            this.accountMenu.Name = "accountMenu";
+            this.accountMenu.Size = new System.Drawing.Size(71, 20);
+            this.accountMenu.Text = "Tài khoản";
+            // 
+            // accountDetailItem
+            // 
+            this.accountDetailItem.Name = "accountDetailItem";
+            this.accountDetailItem.Size = new System.Drawing.Size(187, 22);
+            this.accountDetailItem.Text = "Thông tin tài khoản";
+            this.accountDetailItem.Click += new System.EventHandler(this.accountDetailItem_Click);
+            // 
+            // addAccountItem
+            // 
+            this.addAccountItem.Name = "addAccountItem";
+            this.addAccountItem.Size = new System.Drawing.Size(187, 22);
+            this.addAccountItem.Text = "Thêm tài khoản";
+            this.addAccountItem.Click += new System.EventHandler(this.addAccountItem_Click);
+            // 
+            // staffListItem
+            // 
+            this.staffListItem.Name = "staffListItem";
+            this.staffListItem.Size = new System.Drawing.Size(187, 22);
+            this.staffListItem.Text = "Danh sách nhân viên";
+            this.staffListItem.Click += new System.EventHandler(this.staffListItem_Click);
+            // 
+            // logOutMenu
+            // 
+            this.logOutMenu.Name = "logOutMenu";
+            this.logOutMenu.Size = new System.Drawing.Size(76, 20);
+            this.logOutMenu.Text = "Đăng xuất";
+            this.logOutMenu.Click += new System.EventHandler(this.logOutMenu_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(52, 95);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(84, 19);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "Tên phòng:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(52, 147);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(88, 19);
+            this.label11.TabIndex = 1;
+            this.label11.Text = "Loại phòng:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(52, 193);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(67, 19);
+            this.label12.TabIndex = 1;
+            this.label12.Text = "Giá tiền:";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -560,12 +751,16 @@
             this.panel1.PerformLayout();
             this.controlRoom.ResumeLayout(false);
             this.controlRoom.PerformLayout();
+            this.manageRoom.ResumeLayout(false);
+            this.manageRoom.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UD_Discount)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.roundPanel1.ResumeLayout(false);
             this.roundPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UD_numberic)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -610,5 +805,21 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txbTotalPrice;
         private System.Windows.Forms.ToolStripMenuItem inHóaĐơnToolStripMenuItem;
+        private System.Windows.Forms.Panel manageRoom;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ListView lvRoom;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ColumnHeader nameRoom;
+        private System.Windows.Forms.ColumnHeader roomType;
+        private System.Windows.Forms.ColumnHeader romStatus;
+        private System.Windows.Forms.ColumnHeader roomPrice;
+        private RoundedButton roundedButton3;
+        private RoundedButton roundedButton2;
+        private RoundedButton bntAddRoom;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
     }
 }

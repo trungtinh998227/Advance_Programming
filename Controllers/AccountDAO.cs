@@ -12,7 +12,7 @@ namespace KaraokeApp.Controllers
         private AccountDAO() { }
 
         internal static AccountDAO Instance {
-            get {if(instance==null) instance = new AccountDAO(); return AccountDAO.instance; }
+            get { if(instance==null) instance = new AccountDAO(); return AccountDAO.instance; }
             set => instance = value; 
         }
 

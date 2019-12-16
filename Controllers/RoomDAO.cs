@@ -86,5 +86,14 @@ namespace KaraokeApp.Models
         {
             return db.Rooms.Where(r => r.RoomStatus == Constants.ROOM_STATUS.EMPTY && r.RoomType == roomTyle).ToList();
         }
+        public int GetRoomPrice(String RoomName)
+        {
+            return db.Rooms.FirstOrDefault(r => r.Name == RoomName).Price;
+        }
+
+        public Room CheckValidRoom(int roomID)
+        {
+            return db.Rooms.FirstOrDefault(r => r.ID == roomID && r.RoomStatus == Constants.ROOM_STATUS.FULL);
+        }
     }
 }

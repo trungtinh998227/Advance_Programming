@@ -11,10 +11,14 @@ namespace KaraokeApp
 {
     public partial class Main : Form
     {
+        public static Boolean isPay = false;
         static int RoomWidth = 160;
         static int RoomHeight = 90;
         static Boolean timed = true;
         private Room room { get; set; }
+        private Account_Room acc_r { get; set; }
+        private BillInfor bill = new BillInfor();
+        //private Food_Room Food_Room { get; set; }
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
         (
@@ -44,6 +48,7 @@ namespace KaraokeApp
             fPanel_Room_VIP.Controls.Clear();
             List<Room> roomNormals = RoomDAO.Instance.GetRoomNormal();
             List<Room> roomVIPs = RoomDAO.Instance.GetRoomVIP();
+            
             foreach (Room room in roomNormals)
             {
                 ToolTip tt = new ToolTip() { ToolTipTitle = "Hướng dẫn:", ToolTipIcon = ToolTipIcon.Info };
@@ -159,7 +164,6 @@ namespace KaraokeApp
 
         private void cbProduct_SelectedIndexChanged(object sender, EventArgs e)
         {
-            timed = true;
             if (cbProduct.Text.Equals("Thức ăn"))
             {
                 UD_numberic.Value = 1;
@@ -232,11 +236,11 @@ namespace KaraokeApp
             {
                 ListViewItem lvitems = new ListViewItem(FoodDAO.Instance.GetFoodNameByID(fr.Food.ID));
                 lvitems.SubItems.Add(fr.Amount.ToString());
-                lvitems.SubItems.Add(fr.TotalPrice.ToString("N2"));
+                lvitems.SubItems.Add(fr.TotalPrice.ToString("###,###"));
                 totalprice += fr.TotalPrice;
                 lvBill.Items.Add(lvitems);
             }
-            txbTotalPrice.Text = totalprice.ToString("N2")+ " VNĐ";
+            txbTotalPrice.Text = totalprice.ToString("###,###") + " VNĐ";
         }
 
         private void cbNameProduct_SelectedIndexChanged(object sender, EventArgs e)
@@ -244,7 +248,7 @@ namespace KaraokeApp
             timed = true;
             UD_numberic.Value = 1;
             ToolTip toolTip = new ToolTip() { ToolTipTitle = "Giá tiền:", ToolTipIcon = ToolTipIcon.Info };
-            toolTip.SetToolTip(sender as ComboBox, FoodDAO.Instance.GetFoodByName(cbNameProduct.SelectedItem.ToString()).Price.ToString("N2"));
+            toolTip.SetToolTip(sender as ComboBox, FoodDAO.Instance.GetFoodByName(cbNameProduct.SelectedItem.ToString()).Price.ToString("###,###"));
         }
 
         private void lvBill_SelectedIndexChanged(object sender, EventArgs e)
@@ -314,21 +318,21 @@ namespace KaraokeApp
         private void bntChangeRoom_Click(object sender, EventArgs e)
         {
             /*
-                Tạo ra 1 phòng mới :newRoom
-                - Lấy Account_room phòng hiện tại -> đổi roomID thành newRoomID
-                - Lấy các Food_room phòng hiện tại -> đổi roomID thành newRoomID
-                - Update trạng thái phòng hiện tại -> EMPTY
-                - Set trạng thái phòng mới thành FULL
-             */
+            Tạo ra 1 phòng mới :newRoom
+            - Lấy Account_room phòng hiện tại -> đổi roomID thành newRoomID
+            - Lấy các Food_room phòng hiện tại -> đổi roomID thành newRoomID
+            - Update trạng thái phòng hiện tại -> EMPTY
+            - Set trạng thái phòng mới thành FULL 
+            */
             Room newRoom = RoomDAO.Instance.GetRoom(cbChooseRoom.Text);
-            Account_RoomDAO.instance.updateAccR(room.ID,newRoom.ID);
+            Account_RoomDAO.instance.updateAccR(room.ID, newRoom.ID);
 
             List<Food_Room> lsiFR = Food_RoomDAO.Instance.GetFood_RoomByRoomID(room.ID);
             foreach (Food_Room fr in lsiFR)
             {
                 Food_RoomDAO.Instance.UpdateFoodRoom(fr, newRoom);
             }
-            RoomDAO.Instance.UpdateRoom(room.ID,Constants.ROOM_STATUS.EMPTY);
+            RoomDAO.Instance.UpdateRoom(room.ID, Constants.ROOM_STATUS.EMPTY);
             newRoom.RoomStatus = Constants.ROOM_STATUS.FULL;
             KaraokeContext.Instance.SaveChanges();
             LoadRoom();
@@ -343,6 +347,110 @@ namespace KaraokeApp
                 -------------------------------------------------------------------------------------------------------
                 Form Bill_Infor close -> Cập nhật lại trạng thái phòng
              */
+            //------------Get Account_room----------------
+            if (RoomDAO.Instance.CheckValidRoom(room.ID) != null)
+            {
+                var checkOut = DateTime.Now;
+                acc_r = Account_RoomDAO.instance.GetAccount_Room(room.ID);
+                acc_r.CheckOut = checkOut;
+                acc_r.Discount = Convert.ToInt32(UD_Discount.Value);
+                acc_r.TotalPrice = Convert.ToInt32((checkOut - acc_r.CheckIn).TotalMinutes * room.Price / 60);
+                //------------Get Food_room-------------------
+                var fr = Food_RoomDAO.Instance.GetFood_RoomByRoomID(room.ID);
+                //------------Create Bill Infor---------------
+                bill.AccountName = AccountDAO.Instance.GetAccountByID(Constants.userID).Name;
+                bill.RoomName = room.Name;
+                bill.food_Rooms = fr;
+                bill.checkIn = acc_r.CheckIn;
+                bill.checkOut = acc_r.CheckOut;
+                bill.DisCount = acc_r.Discount;
+
+                bill.food_Rooms = fr;
+
+                Bill_Infor bi = new Bill_Infor(bill);
+                bi.FormClosed += BillForm_Close;
+                bi.ShowDialog();
+            }
+            else
+            {
+                DialogResult dialogResult = MessageBox.Show("Bạn đang chọn thanh toán phòng trống", "Lưu ý", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (dialogResult == DialogResult.OK)
+                {
+                    this.ActiveControl = null;
+                }
+            }
+        }
+
+        private void BillForm_Close(object sender, FormClosedEventArgs e)
+        {
+            if (isPay)
+            {
+                acc_r.PayStatus = Constants.BILL_TYPE.PAY;
+                Account_RoomDAO.instance.UpdateAccountRoom(acc_r);
+                room.RoomStatus = Constants.ROOM_STATUS.EMPTY;
+                RoomDAO.Instance.UpdateRoom(room);
+            }
+        }
+
+        private void cbTypePay_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (cbTypePay.Text)
+            {
+                case "Tiền Mặt":
+                    bill.PayType = Constants.PAY_TYPE.CASH;
+                    break;
+                case "Chuyển Khoản":
+                    bill.PayType = Constants.PAY_TYPE.CARD;
+                    break;
+                case "Samsung Pay":
+                    bill.PayType = Constants.PAY_TYPE.SAMSUNGPAY;
+                    break;
+                case "Momo":
+                    bill.PayType = Constants.PAY_TYPE.MOMO;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void inHóaĐơnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void manageRoomItem_Click(object sender, EventArgs e)
+        {
+            manageRoom.Visible = true;
+        }
+
+        private void manageMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void accountingItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void accountDetailItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addAccountItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void staffListItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void logOutMenu_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
