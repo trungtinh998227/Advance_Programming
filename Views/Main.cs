@@ -16,6 +16,7 @@ namespace KaraokeApp
         static int RoomHeight = 90;
         static Boolean timed = true;
         private Room room { get; set; }
+        private int updateRoomID { get; set; }
         private Account_Room acc_r { get; set; }
         private BillInfor bill = new BillInfor();
         //private Food_Room Food_Room { get; set; }
@@ -423,6 +424,7 @@ namespace KaraokeApp
         private void manageRoomItem_Click(object sender, EventArgs e)
         {
             manageRoom.Visible = true;
+            manageMenu.Visible = false;
         }
 
  
@@ -481,6 +483,7 @@ namespace KaraokeApp
                     bntEditRoom.Enabled = true;
                 }
                 txbNameRoom.Text = item.SubItems[0].Text;
+                updateRoomID = RoomDAO.Instance.GetRoom(item.SubItems[0].Text).ID;
                 cbRoom_Type.Text = item.SubItems[1].Text;
                 txbRoomPrice.Text = item.SubItems[3].Text;
             }
@@ -489,21 +492,44 @@ namespace KaraokeApp
         private void billPrintItem_Click(object sender, EventArgs e)
         {
             manageRoom.Visible = false;
+            manageMenu.Visible = false;
         }
 
         private void bntEditRoom_Click(object sender, EventArgs e)
         {
-
+            var updateRoom = RoomDAO.Instance.GetRoom(updateRoomID);
+            if(updateRoom != null)
+            {
+                updateRoom.Name = txbNameRoom.Text;
+                updateRoom.RoomStatus = Constants.ROOM_STATUS.EMPTY;
+                updateRoom.RoomType = cbRoom_Type.Text;
+                updateRoom.Price = Convert.ToInt32(Convert.ToDouble(txbRoomPrice.Text));
+                KaraokeContext.Instance.SaveChanges();
+                MessageBox.Show("Sửa thành công", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txbNameRoom.Text = "";
+                cbRoom_Type.Text = "";
+                txbRoomPrice.Text = "";
+                LoadDataRoom();
+                LoadRoom();
+            }
         }
 
         private void txbRoomPrice_TextChanged(object sender, EventArgs e)
         {
-            if(txbRoomPrice.Text != "")
+            try
             {
-                txbRoomPrice.Text = Convert.ToDouble(txbRoomPrice.Text).ToString("###,###");
-                txbRoomPrice.SelectionStart = txbRoomPrice.Text.Length;
-                txbRoomPrice.SelectionLength = 0;
+                if (txbRoomPrice.Text != "")
+                {
+                    txbRoomPrice.Text = Convert.ToDouble(txbRoomPrice.Text).ToString("###,###");
+                    txbRoomPrice.SelectionStart = txbRoomPrice.Text.Length;
+                    txbRoomPrice.SelectionLength = 0;
+                }
             }
+            catch (Exception exx)
+            {
+                exx.ToString();
+            }
+            
         }
 
         private void txbNameRoom_TextChanged(object sender, EventArgs e)
@@ -520,6 +546,38 @@ namespace KaraokeApp
                 bntDeleteRoom.Enabled = true;
                 bntEditRoom.Enabled = true;
             }
+        }
+
+        private void bntDeleteRoom_Click(object sender, EventArgs e)
+        {
+            var room_dele = RoomDAO.Instance.GetRoom(txbNameRoom.Text);
+            if (room_dele!= null)
+            {
+                RoomDAO.Instance.deleteRoom(room_dele);
+                txbNameRoom.Text = "";
+                cbRoom_Type.Text = "";
+                txbRoomPrice.Text = "";
+                LoadDataRoom();
+                LoadRoom();
+            }
+        }
+
+        private void manageMenuItem_Click(object sender, EventArgs e)
+        {
+            manageMenu.Visible = true;
+            manageRoom.Visible = false;
+        }
+
+        private void manageMenu_VisibleChanged(object sender, EventArgs e)
+        {
+            if (manageMenu.Visible)
+            {
+
+            }
+        }
+        private void LoadMenuData()
+        {
+
         }
     }
 }

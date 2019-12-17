@@ -44,20 +44,6 @@ namespace KaraokeApp.Models
                 e.ToString();
             }
         }
-        public void UpdateManageRoom(Room room)
-        {
-            try
-            {
-                //Get this room and update value
-                Room r = GetRoom(room.ID);
-                r.Name = room.Name;
-                db.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                e.ToString();
-            }
-        }
         public void UpdateRoom(int roomID, String status)
         {
             try
@@ -108,6 +94,11 @@ namespace KaraokeApp.Models
         public Room CheckValidRoom(int roomID)
         {
             return db.Rooms.FirstOrDefault(r => r.ID == roomID && r.RoomStatus == Constants.ROOM_STATUS.FULL);
+        }
+        public void deleteRoom(Room r)
+        {
+                db.Rooms.Remove(r);
+                db.SaveChanges();
         }
     }
 }

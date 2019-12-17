@@ -76,6 +76,7 @@
             this.accountDetailItem = new System.Windows.Forms.ToolStripMenuItem();
             this.staffListItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logOutMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageMenu = new System.Windows.Forms.Panel();
             this.bntEditRoom = new KaraokeApp.RoundedButton();
             this.bntDeleteRoom = new KaraokeApp.RoundedButton();
             this.bntAddRoom = new KaraokeApp.RoundedButton();
@@ -88,6 +89,35 @@
             this.label5 = new System.Windows.Forms.Label();
             this.cbProduct = new System.Windows.Forms.ComboBox();
             this.cbNameProduct = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.lvFoodList = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvDrinkList = new System.Windows.Forms.ListView();
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label15 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.bntAddNewFood = new KaraokeApp.RoundedButton();
+            this.bntDeleteFood = new KaraokeApp.RoundedButton();
+            this.bntEditFood = new KaraokeApp.RoundedButton();
+            this.txbNameFood = new System.Windows.Forms.TextBox();
+            this.txbUnit = new System.Windows.Forms.TextBox();
+            this.txbFoodPrice = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.cbProducer = new System.Windows.Forms.ComboBox();
+            this.UD_Account = new System.Windows.Forms.NumericUpDown();
             bnt_Exit = new System.Windows.Forms.Button();
             button1 = new System.Windows.Forms.Button();
             button2 = new System.Windows.Forms.Button();
@@ -97,8 +127,11 @@
             this.cbRoomType.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UD_Discount)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            this.manageMenu.SuspendLayout();
             this.roundPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UD_numberic)).BeginInit();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.UD_Account)).BeginInit();
             this.SuspendLayout();
             // 
             // bnt_Exit
@@ -171,6 +204,7 @@
             // 
             // controlRoom
             // 
+            this.controlRoom.Controls.Add(this.manageMenu);
             this.controlRoom.Controls.Add(this.manageRoom);
             this.controlRoom.Controls.Add(this.txbTotalPrice);
             this.controlRoom.Controls.Add(this.label6);
@@ -576,6 +610,7 @@
             this.manageMenuItem.Name = "manageMenuItem";
             this.manageMenuItem.Size = new System.Drawing.Size(170, 22);
             this.manageMenuItem.Text = "Quản lý thực đơn";
+            this.manageMenuItem.Click += new System.EventHandler(this.manageMenuItem_Click);
             // 
             // accountingItem
             // 
@@ -610,6 +645,23 @@
             this.logOutMenu.Size = new System.Drawing.Size(76, 20);
             this.logOutMenu.Text = "Đăng xuất";
             // 
+            // manageMenu
+            // 
+            this.manageMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(192)))), ((int)(((byte)(205)))));
+            this.manageMenu.Controls.Add(this.panel2);
+            this.manageMenu.Controls.Add(this.lvDrinkList);
+            this.manageMenu.Controls.Add(this.lvFoodList);
+            this.manageMenu.Controls.Add(this.label14);
+            this.manageMenu.Controls.Add(this.label15);
+            this.manageMenu.Controls.Add(this.label13);
+            this.manageMenu.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.manageMenu.Location = new System.Drawing.Point(2, 3);
+            this.manageMenu.Name = "manageMenu";
+            this.manageMenu.Size = new System.Drawing.Size(1139, 679);
+            this.manageMenu.TabIndex = 3;
+            this.manageMenu.Visible = false;
+            this.manageMenu.VisibleChanged += new System.EventHandler(this.manageMenu_VisibleChanged);
+            // 
             // bntEditRoom
             // 
             this.bntEditRoom.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -631,6 +683,7 @@
             this.bntDeleteRoom.TabIndex = 0;
             this.bntDeleteRoom.Text = "Xóa phòng";
             this.bntDeleteRoom.UseVisualStyleBackColor = true;
+            this.bntDeleteRoom.Click += new System.EventHandler(this.bntDeleteRoom_Click);
             // 
             // bntAddRoom
             // 
@@ -762,6 +815,258 @@
             this.cbNameProduct.Text = "Tên sản phẩm";
             this.cbNameProduct.SelectedIndexChanged += new System.EventHandler(this.cbNameProduct_SelectedIndexChanged);
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(195, 176);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(187, 25);
+            this.label13.TabIndex = 1;
+            this.label13.Text = "Danh sách món ăn";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(736, 176);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(216, 25);
+            this.label14.TabIndex = 1;
+            this.label14.Text = "Danh sách nước uống";
+            // 
+            // lvFoodList
+            // 
+            this.lvFoodList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(180)))), ((int)(((byte)(190)))));
+            this.lvFoodList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
+            this.lvFoodList.HideSelection = false;
+            this.lvFoodList.Location = new System.Drawing.Point(70, 212);
+            this.lvFoodList.Name = "lvFoodList";
+            this.lvFoodList.Size = new System.Drawing.Size(449, 464);
+            this.lvFoodList.TabIndex = 2;
+            this.lvFoodList.UseCompatibleStateImageBehavior = false;
+            this.lvFoodList.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Tên món";
+            this.columnHeader1.Width = 111;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Tồn kho";
+            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader2.Width = 72;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Đơn vị";
+            this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader3.Width = 62;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Giá";
+            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader4.Width = 91;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Nhà sản xuất";
+            this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader5.Width = 110;
+            // 
+            // lvDrinkList
+            // 
+            this.lvDrinkList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(180)))), ((int)(((byte)(190)))));
+            this.lvDrinkList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader6,
+            this.columnHeader7,
+            this.columnHeader8,
+            this.columnHeader9,
+            this.columnHeader10});
+            this.lvDrinkList.HideSelection = false;
+            this.lvDrinkList.Location = new System.Drawing.Point(614, 212);
+            this.lvDrinkList.Name = "lvDrinkList";
+            this.lvDrinkList.Size = new System.Drawing.Size(449, 464);
+            this.lvDrinkList.TabIndex = 2;
+            this.lvDrinkList.UseCompatibleStateImageBehavior = false;
+            this.lvDrinkList.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Tên món";
+            this.columnHeader6.Width = 111;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "Tồn kho";
+            this.columnHeader7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader7.Width = 72;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "Đơn vị";
+            this.columnHeader8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader8.Width = 62;
+            // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Text = "Giá";
+            this.columnHeader9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader9.Width = 91;
+            // 
+            // columnHeader10
+            // 
+            this.columnHeader10.Text = "Nhà sản xuất";
+            this.columnHeader10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader10.Width = 110;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.Color.Red;
+            this.label15.Location = new System.Drawing.Point(447, 4);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(256, 36);
+            this.label15.TabIndex = 1;
+            this.label15.Text = "Quản lý thực đơn";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(192)))), ((int)(((byte)(170)))));
+            this.panel2.Controls.Add(this.UD_Account);
+            this.panel2.Controls.Add(this.cbProducer);
+            this.panel2.Controls.Add(this.label20);
+            this.panel2.Controls.Add(this.label19);
+            this.panel2.Controls.Add(this.label18);
+            this.panel2.Controls.Add(this.label17);
+            this.panel2.Controls.Add(this.label16);
+            this.panel2.Controls.Add(this.txbFoodPrice);
+            this.panel2.Controls.Add(this.txbUnit);
+            this.panel2.Controls.Add(this.txbNameFood);
+            this.panel2.Controls.Add(this.bntEditFood);
+            this.panel2.Controls.Add(this.bntDeleteFood);
+            this.panel2.Controls.Add(this.bntAddNewFood);
+            this.panel2.Location = new System.Drawing.Point(54, 60);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1009, 100);
+            this.panel2.TabIndex = 3;
+            // 
+            // bntAddNewFood
+            // 
+            this.bntAddNewFood.Location = new System.Drawing.Point(688, 26);
+            this.bntAddNewFood.Name = "bntAddNewFood";
+            this.bntAddNewFood.Size = new System.Drawing.Size(87, 48);
+            this.bntAddNewFood.TabIndex = 0;
+            this.bntAddNewFood.Text = "Thêm";
+            this.bntAddNewFood.UseVisualStyleBackColor = true;
+            // 
+            // bntDeleteFood
+            // 
+            this.bntDeleteFood.Location = new System.Drawing.Point(781, 26);
+            this.bntDeleteFood.Name = "bntDeleteFood";
+            this.bntDeleteFood.Size = new System.Drawing.Size(87, 48);
+            this.bntDeleteFood.TabIndex = 0;
+            this.bntDeleteFood.Text = "Xóa";
+            this.bntDeleteFood.UseVisualStyleBackColor = true;
+            // 
+            // bntEditFood
+            // 
+            this.bntEditFood.Location = new System.Drawing.Point(874, 26);
+            this.bntEditFood.Name = "bntEditFood";
+            this.bntEditFood.Size = new System.Drawing.Size(87, 48);
+            this.bntEditFood.TabIndex = 0;
+            this.bntEditFood.Text = "Sửa";
+            this.bntEditFood.UseVisualStyleBackColor = true;
+            // 
+            // txbNameFood
+            // 
+            this.txbNameFood.Location = new System.Drawing.Point(94, 10);
+            this.txbNameFood.Name = "txbNameFood";
+            this.txbNameFood.Size = new System.Drawing.Size(264, 26);
+            this.txbNameFood.TabIndex = 1;
+            // 
+            // txbUnit
+            // 
+            this.txbUnit.Location = new System.Drawing.Point(94, 49);
+            this.txbUnit.Name = "txbUnit";
+            this.txbUnit.Size = new System.Drawing.Size(100, 26);
+            this.txbUnit.TabIndex = 2;
+            // 
+            // txbFoodPrice
+            // 
+            this.txbFoodPrice.Location = new System.Drawing.Point(493, 10);
+            this.txbFoodPrice.Name = "txbFoodPrice";
+            this.txbFoodPrice.Size = new System.Drawing.Size(146, 26);
+            this.txbFoodPrice.TabIndex = 4;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(16, 13);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(72, 19);
+            this.label16.TabIndex = 5;
+            this.label16.Text = "Tên món:";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(209, 55);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(74, 19);
+            this.label17.TabIndex = 5;
+            this.label17.Text = "Số lượng:";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(16, 53);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(59, 19);
+            this.label18.TabIndex = 5;
+            this.label18.Text = "Đơn vị:";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(449, 13);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(38, 19);
+            this.label19.TabIndex = 5;
+            this.label19.Text = "Giá:";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(385, 53);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(102, 19);
+            this.label20.TabIndex = 5;
+            this.label20.Text = "Nhà sản xuất:";
+            // 
+            // cbProducer
+            // 
+            this.cbProducer.FormattingEnabled = true;
+            this.cbProducer.Location = new System.Drawing.Point(493, 48);
+            this.cbProducer.Name = "cbProducer";
+            this.cbProducer.Size = new System.Drawing.Size(146, 27);
+            this.cbProducer.TabIndex = 6;
+            // 
+            // UD_Account
+            // 
+            this.UD_Account.Location = new System.Drawing.Point(300, 50);
+            this.UD_Account.Name = "UD_Account";
+            this.UD_Account.Size = new System.Drawing.Size(58, 26);
+            this.UD_Account.TabIndex = 7;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -785,9 +1090,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.UD_Discount)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.manageMenu.ResumeLayout(false);
+            this.manageMenu.PerformLayout();
             this.roundPanel1.ResumeLayout(false);
             this.roundPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UD_numberic)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.UD_Account)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -850,5 +1160,35 @@
         private System.Windows.Forms.TextBox txbRoomPrice;
         private System.Windows.Forms.TextBox txbNameRoom;
         private System.Windows.Forms.ComboBox cbRoom_Type;
+        private System.Windows.Forms.Panel manageMenu;
+        private System.Windows.Forms.ListView lvFoodList;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.Panel panel2;
+        private RoundedButton bntEditFood;
+        private RoundedButton bntDeleteFood;
+        private RoundedButton bntAddNewFood;
+        private System.Windows.Forms.ListView lvDrinkList;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.ColumnHeader columnHeader8;
+        private System.Windows.Forms.ColumnHeader columnHeader9;
+        private System.Windows.Forms.ColumnHeader columnHeader10;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ComboBox cbProducer;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox txbFoodPrice;
+        private System.Windows.Forms.TextBox txbUnit;
+        private System.Windows.Forms.TextBox txbNameFood;
+        private System.Windows.Forms.NumericUpDown UD_Account;
     }
 }
