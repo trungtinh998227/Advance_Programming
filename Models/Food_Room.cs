@@ -15,6 +15,7 @@ namespace KaraokeApp.Models
         {
             Amount = amount;
             TotalPrice = totalPrice;
+            PayStatus = Constants.BILL_TYPE.UNPAY;
         }
 
         [Key]
@@ -23,7 +24,9 @@ namespace KaraokeApp.Models
         public int Amount { get; set; }
         public int TotalPrice { get; set; }
         public int? BillInfor_ID { get; set; }
-        
+
+        public string PayStatus { get; set; }
+
         public virtual Room room { get; set; }
         public virtual Food Food { get; set; }
         public virtual BillInfor BillInfor { get; set; }

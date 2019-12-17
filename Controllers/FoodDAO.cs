@@ -36,7 +36,6 @@ namespace KaraokeApp.Controllers
         }
         public List<Food> GetDrinks()
         {
-            Console.WriteLine("dasdasda");
             return db.Foods.Where(d => d.FoodType == Constants.FOOD_TYPE.DRINK).ToList();
         }
         public Food GetFoodByName(string name)

@@ -101,18 +101,18 @@ namespace KaraokeApp
 
         private void bnt_VIP_LostFocus(object sender, EventArgs e)
         {
-            if (!bntAddFood.Focused)
+            /*if (!bntAddFood.Focused)
             {
                 (sender as Button).ForeColor = Color.Black;
-            }
+            }*/
         }
 
         private void bnt_Normal_LostFocus(object sender, EventArgs e)
         {
-            if (fPanel_Room_Normal.Focused)
+/*            if (fPanel_Room_Normal.Focused)
             {
                 (sender as Button).ForeColor = Color.Black;
-            }
+            }*/
             
         }
 
@@ -389,6 +389,8 @@ namespace KaraokeApp
                 Account_RoomDAO.instance.UpdateAccountRoom(acc_r);
                 room.RoomStatus = Constants.ROOM_STATUS.EMPTY;
                 RoomDAO.Instance.UpdateRoom(room);
+                LoadRoom();
+                lvBill.Items.Clear();
             }
         }
 
@@ -423,34 +425,101 @@ namespace KaraokeApp
             manageRoom.Visible = true;
         }
 
-        private void manageMenuItem_Click(object sender, EventArgs e)
+ 
+
+        private void manageRoom_VisibleChanged(object sender, EventArgs e)
+        {
+            if (manageRoom.Visible)
+                LoadDataRoom();
+        }
+        private void LoadDataRoom()
+        {
+            lvRoom.Items.Clear();
+            var roomData = RoomDAO.Instance.GetRooms();
+            foreach (Room fr in roomData)
+            {
+                ListViewItem lvitems = new ListViewItem(fr.Name);
+                lvitems.SubItems.Add(fr.RoomType);
+                lvitems.SubItems.Add(fr.RoomStatus);
+                lvitems.SubItems.Add(fr.Price.ToString("###,###"));
+                lvRoom.Items.Add(lvitems);
+            }
+        }
+
+        private void bntAddRoom_Click(object sender, EventArgs e)
+        {
+            if (RoomDAO.Instance.GetRoom(txbNameRoom.Text) == null)
+            {
+                Room r = new Room(txbNameRoom.Text, Constants.ROOM_STATUS.EMPTY, cbRoom_Type.Text, Convert.ToInt32(Convert.ToDouble(txbRoomPrice.Text)));
+                RoomDAO.Instance.AddRoom(r);
+                MessageBox.Show("Thêm thành công", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txbNameRoom.Text = "";
+                cbRoom_Type.Text = "";
+                txbRoomPrice.Text = "";
+                LoadDataRoom();
+                LoadRoom();
+            }
+            else
+            {
+                MessageBox.Show("Phòng đã tồn tại\n Vui lòng nhập lại thông tin phòng", "Lưu ý", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void lvRoom_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lvRoom.SelectedItems.Count > 0)
+            {
+                ListViewItem item = lvRoom.SelectedItems[0];
+                if (item.SubItems[2].Text == "FULL" || item.SubItems[2].Text == "DATE")
+                {
+                    bntDeleteRoom.Enabled = false;
+                    bntEditRoom.Enabled = false;
+                }
+                else
+                {
+                    bntDeleteRoom.Enabled = true;
+                    bntEditRoom.Enabled = true;
+                }
+                txbNameRoom.Text = item.SubItems[0].Text;
+                cbRoom_Type.Text = item.SubItems[1].Text;
+                txbRoomPrice.Text = item.SubItems[3].Text;
+            }
+        }
+
+        private void billPrintItem_Click(object sender, EventArgs e)
+        {
+            manageRoom.Visible = false;
+        }
+
+        private void bntEditRoom_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void accountingItem_Click(object sender, EventArgs e)
+        private void txbRoomPrice_TextChanged(object sender, EventArgs e)
         {
-
+            if(txbRoomPrice.Text != "")
+            {
+                txbRoomPrice.Text = Convert.ToDouble(txbRoomPrice.Text).ToString("###,###");
+                txbRoomPrice.SelectionStart = txbRoomPrice.Text.Length;
+                txbRoomPrice.SelectionLength = 0;
+            }
         }
 
-        private void accountDetailItem_Click(object sender, EventArgs e)
+        private void txbNameRoom_TextChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void addAccountItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void staffListItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void logOutMenu_Click(object sender, EventArgs e)
-        {
-
+            if (txbNameRoom.Text != "" && RoomDAO.Instance.GetRoom(txbNameRoom.Text) == null)
+            {
+                bntAddRoom.Enabled = true;
+                bntDeleteRoom.Enabled = false;
+                bntEditRoom.Enabled = false;
+            }
+            else
+            {
+                bntAddRoom.Enabled = false;
+                bntDeleteRoom.Enabled = true;
+                bntEditRoom.Enabled = true;
+            }
         }
     }
 }

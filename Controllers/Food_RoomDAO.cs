@@ -23,7 +23,7 @@ namespace KaraokeApp.Controllers
         {
             try
             {
-                if (db.Food_Rooms.FirstOrDefault(fr => fr.room.ID == food_Room.room.ID && fr.Food.ID == food_Room.Food.ID) == null)
+                if (db.Food_Rooms.FirstOrDefault(fr => fr.room.ID == food_Room.room.ID && fr.Food.ID == food_Room.Food.ID && fr.PayStatus == Constants.BILL_TYPE.UNPAY) == null)
                 {
                     db.Food_Rooms.Add(food_Room);
                     db.SaveChanges();
@@ -55,12 +55,14 @@ namespace KaraokeApp.Controllers
         public List<Food_Room> GetFood_RoomByRoomID(int roomID)
         {
             return (from c in db.Food_Rooms
-                    where c.room.ID == roomID
+                    where c.room.ID == roomID &&
+                    c.BillInfor_ID == null &&
+                    c.PayStatus == "UNPAY"
                     select c).ToList();
         }
         public Food_Room GetFood_RoomByID(int roomID, int FoodID)
         {
-            return db.Food_Rooms.FirstOrDefault(fr=>fr.room.ID == roomID && fr.Food.ID == FoodID);
+            return db.Food_Rooms.FirstOrDefault(fr=>fr.room.ID == roomID && fr.Food.ID == FoodID && fr.BillInfor_ID == null);
         }
         public Food_Room GetFood_RoomByID(int frID)
         {

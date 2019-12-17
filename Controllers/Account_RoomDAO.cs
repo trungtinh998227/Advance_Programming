@@ -18,7 +18,7 @@ namespace KaraokeApp.Controllers
         {
             try
             {
-                if (db.Account_Rooms.FirstOrDefault(ac => ac.CheckIn == account_room.CheckIn && ac.room_ID == account_room.room_ID) == null)
+                if (db.Account_Rooms.FirstOrDefault(ac => ac.CheckIn == account_room.CheckIn && ac.room_ID == account_room.room_ID && ac.PayStatus == Constants.BILL_TYPE.UNPAY) == null)
                 {
                     db.Account_Rooms.Add(account_room);
                     db.SaveChanges();

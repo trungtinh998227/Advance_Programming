@@ -1,9 +1,6 @@
 ﻿using KaraokeApp.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KaraokeApp.Controllers
 {
@@ -23,10 +20,14 @@ namespace KaraokeApp.Controllers
         {
             try
             {
-                db.BillInfors.Add(bi);
-                db.SaveChanges();
+                if (db.BillInfors.FirstOrDefault(bill => bill.checkIn == bi.checkIn && bill.checkOut == bi.checkOut && bill.Payment == bi.Payment) == null)
+                {
+                    Console.WriteLine("asdsad");
+                    db.BillInfors.Add(bi);
+                    db.SaveChanges();
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ex.ToString();
             }

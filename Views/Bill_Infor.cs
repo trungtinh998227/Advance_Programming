@@ -11,6 +11,7 @@ namespace KaraokeApp.Views
     {
         private BillInfor bill;
         private int endprice = 0;
+        private static Boolean pay = true;
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
         (
@@ -66,7 +67,7 @@ namespace KaraokeApp.Views
                 default:
                     break;
             }
-
+            pay = true;
 
         }
         private void LoadBillOder(List<Food_Room> food_Rooms)
@@ -112,19 +113,25 @@ namespace KaraokeApp.Views
 
             */
             Main.isPay = true;
-            try
+            if (pay)
             {
-                foreach (Food_Room fr in bill.food_Rooms)
+                try
                 {
-                    fr.BillInfor_ID = bill.ID;
-                    KaraokeContext.Instance.SaveChanges();
+                    foreach (Food_Room fr in bill.food_Rooms)
+                    {
+                        fr.BillInfor_ID = bill.ID;
+                        fr.PayStatus = Constants.BILL_TYPE.PAY;
+                        KaraokeContext.Instance.SaveChanges();
+                    }
                 }
-            }catch(Exception exx)
-            {
-                exx.ToString();
+                catch (Exception exx)
+                {
+                    exx.ToString();
+                }
+                bill.Payment = endprice;
+                BillInforDAO.Instance.AddBillInfor(bill);
             }
-            bill.Payment = endprice;
-            BillInforDAO.Instance.AddBillInfor(bill);
+            pay = false;
             this.Close();
         }
 
