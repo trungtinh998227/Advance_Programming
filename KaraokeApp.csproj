@@ -76,6 +76,12 @@
     <Compile Include="Models\Food_Room.cs" />
     <Compile Include="Models\Producer.cs" />
     <Compile Include="Models\Account_Room.cs" />
+    <Compile Include="Views\Account_Infor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Account_Infor.Designer.cs">
+      <DependentUpon>Account_Infor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Bill_Infor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +117,9 @@
     <Compile Include="Views\Manage_Room.Designer.cs">
       <DependentUpon>Manage_Room.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\Account_Infor.resx">
+      <DependentUpon>Account_Infor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Bill_Infor.resx">
       <DependentUpon>Bill_Infor.cs</DependentUpon>
     </EmbeddedResource>

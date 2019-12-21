@@ -54,5 +54,10 @@ namespace KaraokeApp.Controllers
         {
             return db.Foods.FirstOrDefault(fn => fn.Name == name).FoodType;
         }
+        public void deleteFood(Food f)
+        {
+            db.Foods.Remove(f);
+            db.SaveChanges();
+        }
     }
 }

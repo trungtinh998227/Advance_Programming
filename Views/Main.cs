@@ -12,13 +12,16 @@ namespace KaraokeApp
     public partial class Main : Form
     {
         public static Boolean isPay = false;
+        private static string foodType;
         static int RoomWidth = 160;
         static int RoomHeight = 90;
         static Boolean timed = true;
         private Room room { get; set; }
         private int updateRoomID { get; set; }
+        private int updateFoodID { get; set; }
         private Account_Room acc_r { get; set; }
         private BillInfor bill = new BillInfor();
+        private Producer producer { get; set; }
         //private Food_Room Food_Room { get; set; }
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
@@ -102,19 +105,12 @@ namespace KaraokeApp
 
         private void bnt_VIP_LostFocus(object sender, EventArgs e)
         {
-            /*if (!bntAddFood.Focused)
-            {
-                (sender as Button).ForeColor = Color.Black;
-            }*/
+            (sender as Button).ForeColor = Color.Black;
         }
 
         private void bnt_Normal_LostFocus(object sender, EventArgs e)
         {
-/*            if (fPanel_Room_Normal.Focused)
-            {
-                (sender as Button).ForeColor = Color.Black;
-            }*/
-            
+            (sender as Button).ForeColor = Color.Black;
         }
 
         private void Bnt_VIP_Click(object sender, EventArgs e)
@@ -189,6 +185,7 @@ namespace KaraokeApp
 
         private void bntAddFood_Click(object sender, EventArgs e)
         {
+            Console.WriteLine("aaa");
             if (timed)
             {
                 var food = FoodDAO.Instance.GetFoodByName(cbNameProduct.Text);
@@ -553,12 +550,16 @@ namespace KaraokeApp
             var room_dele = RoomDAO.Instance.GetRoom(txbNameRoom.Text);
             if (room_dele!= null)
             {
-                RoomDAO.Instance.deleteRoom(room_dele);
-                txbNameRoom.Text = "";
-                cbRoom_Type.Text = "";
-                txbRoomPrice.Text = "";
-                LoadDataRoom();
-                LoadRoom();
+                DialogResult dialogResult = MessageBox.Show("Bạn chắc chắn muốn xóa", "Lưu ý", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.OK)
+                {
+                    RoomDAO.Instance.deleteRoom(room_dele);
+                    txbNameRoom.Text = "";
+                    cbRoom_Type.Text = "";
+                    txbRoomPrice.Text = "";
+                    LoadDataRoom();
+                    LoadRoom();
+                }
             }
         }
 
@@ -572,10 +573,190 @@ namespace KaraokeApp
         {
             if (manageMenu.Visible)
             {
-
+                LoadMenuData();
+                var pro = ProducerDAO.Instance.GetProducers();
+                foreach (Producer pr in pro)
+                {
+                    cbProducer.Items.Add(pr.Name);
+                }
             }
         }
         private void LoadMenuData()
+        {
+            // Load Food data
+            lvFoodList.Items.Clear();
+            var foodData = FoodDAO.Instance.GetFoods();
+            foreach (Food f in foodData)
+            {
+                ListViewItem lvitems = new ListViewItem(f.Name);
+                lvitems.SubItems.Add(f.Inventory.ToString());
+                lvitems.SubItems.Add(f.Unit);
+                lvitems.SubItems.Add(f.Price.ToString("###,###"));
+                lvitems.SubItems.Add(ProducerDAO.Instance.GetProducerName(f.producers.ID));
+                lvFoodList.Items.Add(lvitems);
+            }
+            // Load Drink data
+            lvDrinkList.Items.Clear();
+            var drinkData = FoodDAO.Instance.GetDrinks();
+            foreach (Food f in drinkData)
+            {
+                ListViewItem lvitems = new ListViewItem(f.Name);
+                lvitems.SubItems.Add(f.Inventory.ToString());
+                lvitems.SubItems.Add(f.Unit);
+                lvitems.SubItems.Add(f.Price.ToString("###,###"));
+                lvitems.SubItems.Add(ProducerDAO.Instance.GetProducerName(f.producers.ID));
+                lvDrinkList.Items.Add(lvitems);
+            }
+        }
+
+        private void lvFoodList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            foodType = "FOOD";
+            if (lvFoodList.SelectedItems.Count > 0)
+            {
+                ListViewItem item = lvFoodList.SelectedItems[0];
+                txbNameFood.Text = item.SubItems[0].Text.ToString();
+                updateRoomID = FoodDAO.Instance.GetFoodByName(item.SubItems[0].Text).ID;
+                UD_Amount.Value = Convert.ToInt32(item.SubItems[1].Text);
+                txbUnit.Text = item.SubItems[2].Text;
+                cbProducer.Text =  item.SubItems[4].Text;
+                txbFoodPrice.Text = item.SubItems[3].Text;
+            }
+        }
+        private void lvDrinkList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            foodType = "DRINK";
+            if (lvDrinkList.SelectedItems.Count > 0)
+            {
+                ListViewItem item = lvDrinkList.SelectedItems[0];
+                txbNameFood.Text = item.SubItems[0].Text;
+                updateRoomID = FoodDAO.Instance.GetFoodByName(item.SubItems[0].Text).ID;
+                UD_Amount.Value = Convert.ToInt32(item.SubItems[1].Text);
+                txbUnit.Text = item.SubItems[2].Text;
+                cbProducer.Text = item.SubItems[4].Text;
+                txbFoodPrice.Text = item.SubItems[3].Text;
+            }
+        }
+
+        private void bntAddNewFood_Click(object sender, EventArgs e)
+        {
+            Food f = new Food(txbNameFood.Text, Convert.ToInt32(UD_Amount.Value), txbUnit.Text, Convert.ToInt32(Convert.ToDouble(txbFoodPrice.Text)), foodType);
+            f.producers = producer;
+            FoodDAO.Instance.AddFood(f);
+            MessageBox.Show("Thêm thành công", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            txbNameFood.Text = "";
+            txbUnit.Text = "";
+            UD_Amount.Value = 1;
+            cbProducer.Text = "";
+            txbFoodPrice.Text = "";
+            LoadMenuData();
+}
+
+        private void bntDeleteFood_Click(object sender, EventArgs e)
+        {
+            var food_dele = FoodDAO.Instance.GetFoodByName(txbNameRoom.Text);
+            if (food_dele != null)
+            {
+                
+                DialogResult dialogResult = MessageBox.Show("Bạn chắc chắn muốn xóa", "Lưu ý", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.OK)
+                {
+                    FoodDAO.Instance.deleteFood(food_dele);
+                    MessageBox.Show("Xóa thành công", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txbNameFood.Text = "";
+                    txbUnit.Text = "";
+                    UD_Amount.Value = 1;
+                    cbProducer.Text = "";
+                    txbFoodPrice.Text = "";
+                    LoadMenuData();
+                }
+            }
+        }
+
+        private void bntEditFood_Click(object sender, EventArgs e)
+        {
+            var updateFood = FoodDAO.Instance.GetFoodByID(updateRoomID);
+            if (updateFood != null)
+            {
+                updateFood.Name = txbNameFood.Text;
+                updateFood.Inventory = Convert.ToInt32(UD_Amount.Value);
+                updateFood.producers = producer;
+                updateFood.Price = Convert.ToInt32(Convert.ToDouble(txbFoodPrice.Text));
+                updateFood.Unit = txbUnit.Text;
+                KaraokeContext.Instance.SaveChanges();
+
+                MessageBox.Show("Sửa thành công", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txbNameFood.Text = "";
+                txbUnit.Text = "";
+                UD_Amount.Value = 1;
+                cbProducer.Text = "";
+                txbFoodPrice.Text = "";
+                LoadMenuData();
+            }
+        }
+
+        private void txbNameFood_TextChanged(object sender, EventArgs e)
+        {
+            if (FoodDAO.Instance.GetFoodByName(txbNameFood.Text)!=null)
+            {
+                bntAddNewFood.Enabled = false;
+                bntDeleteFood.Enabled = true;
+                bntEditFood.Enabled = true;
+            }
+            else
+            {
+                bntAddNewFood.Enabled = true;
+                bntDeleteFood.Enabled = false;
+                bntEditFood.Enabled = false;
+            }
+        }
+
+        private void txbFoodPrice_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txbFoodPrice.Text != "")
+                {
+                    txbFoodPrice.Text = Convert.ToDouble(txbFoodPrice.Text).ToString("###,###");
+                    txbFoodPrice.SelectionStart = txbFoodPrice.Text.Length;
+                    txbFoodPrice.SelectionLength = 0;
+                }
+            }
+            catch(Exception ex)
+            {
+                ex.ToString();
+            }
+            
+        }
+
+        private void cbProducer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (cbProducer.Text)
+            {
+                case "Red Bull GmbH":
+                    producer = ProducerDAO.Instance.GetProducerByName("Red Bull GmbH");
+                    break;
+                case "Tân Hiệp Phát":
+                    producer = ProducerDAO.Instance.GetProducerByName("Tân Hiệp Phát");
+                    break;
+                case "Bách Hóa Xanh":
+                    producer = ProducerDAO.Instance.GetProducerByName("Bách Hóa Xanh");
+                    break;
+                case "The Coffe House":
+                    producer = ProducerDAO.Instance.GetProducerByName("The Coffe House");
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void accountDetailItem_Click(object sender, EventArgs e)
+        {
+            Account_Infor ac_i = new Account_Infor();
+            ac_i.ShowDialog();
+        }
+
+        private void staffListItem_Click(object sender, EventArgs e)
         {
 
         }

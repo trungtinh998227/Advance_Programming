@@ -9,7 +9,7 @@ namespace KaraokeApp.Models
 {
     public class Constants
     {
-        public static int userID=1;
+        public static int userID;
         public static Color RoomFull = Color.FromArgb(38, 198, 218);
         public static Color RoomEmpty = Color.WhiteSmoke;
         public static Color RomDate = Color.PaleVioletRed;

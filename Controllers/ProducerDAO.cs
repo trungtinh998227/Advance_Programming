@@ -1,6 +1,7 @@
 ﻿using KaraokeApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace KaraokeApp.Controllers
 {
@@ -31,6 +32,14 @@ namespace KaraokeApp.Controllers
         public IEnumerable<Producer> GetProducers()
         {
             return db.Producers;
+        }
+        public string GetProducerName(int proID)
+        {
+            return db.Producers.FirstOrDefault(pr => pr.ID == proID).Name;
+        }
+        public Producer GetProducerByName(string proName)
+        {
+            return db.Producers.FirstOrDefault(pr => pr.Name == proName);
         }
     }
 }
